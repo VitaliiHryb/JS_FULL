@@ -1,11 +1,14 @@
 // [1, [2, 3, 4], 5, [6]] => [1, 2, 3, 4, 5, 6]
+const flatArray =  arr =>
+    arr.flat().slice().sort((a, b) => a - b);
 
-const flatArray =  arr => {
-    let newArr = arr.flat();
-    let Arr = newArr.slice();
-    Arr.sort((a, b) => a - b);
-    return Arr;
-};
+// const flatArray =  arr => {
+//     let newArr = arr.flat();
+//     let Arr = newArr.slice();
+//     Arr.sort((a, b) => a - b);
+//     return Arr;
+// };
+
     //arr.slice().sort((a, b) => b - a);
     //.flat();
 
