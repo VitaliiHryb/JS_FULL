@@ -1,17 +1,14 @@
 // unsorted array => sorted array
 
-//array will change
-/*const sortArray = numbers => {
-    numbers.sort((a, b) => b - a);
-    return numbers;
+//array increase
+/*const sortDesc = numbers =>
+    numbers.slice().sort((a, b) => a - b);
 }*/
 
-// arraywill not change
-const sortDesc = numbers => {
-    const copy = numbers.slice();
-    copy.sort((a, b) => b - a);
-    return copy;
-}
+// array decrease
+const sortDesc = numbers =>
+    numbers.slice().sort((a, b) => b - a);
+
 
 const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
 
