@@ -2,15 +2,16 @@
 'use strict';
 
 const withdraw = (clients, balances, client, amount) => {
-    let clientIndex = clients.indexOf(client);
-    let balancesIndex = balances[clientIndex];
+  let clientIndex = clients.indexOf(client);
+  let balancesIndex = balances[clientIndex];
 
-    if (balancesIndex > amount) {
-        return balancesIndex - amount;
+  if (balancesIndex > amount) {
+      return balancesIndex - amount;
     }
-    return -1;
+return -1;
 }
 
+    const something = num => num;
 //example 1:
 
 //input
