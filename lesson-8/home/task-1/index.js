@@ -1,45 +1,38 @@
-// фильтрацияя массива
-// task-1 short
-const getSpecialNumbers = numbers =>
- numbers.filter(num => num % 3 === 0);
+// Read object properties
+/* eslint-disable dot-notation */
 
+/**
+ * Для решения этой задачи нужно использовать как квадратные скобки так и точки для чтения свойства объекта. В реальных проектах
+ * более предпочтительный вариант - обращение через точку. Но нам нужно научиться работать со всеми опциями.
+ * Чтобы eslint не ругался на эту ошибку, для этой задачи он отключен аннотацией eslint-disable
+ */
 
-const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
-
-console.log(getSpecialNumbers(arr));
-console.log(arr);
-
-// изменяет массив
-/*const getSpecialNumbers = numbers => {
-    let getSpecialNumbers = [];
-
-    for(let i = 0; i < numbers.length; i++) {
-        if (numbers[i] % 3 === 0) {
-            getSpecialNumbers.push(numbers[i]);
-        }
-    }
-
-    return getSpecialNumbers;
+const transaction = {
+  currency: 'USD',
+  value: 170,
+  operation: 'sale',
+  agent: {
+    country: 'Ukraine',
+    company: 'NYSE',
+  },
+  'operation time': 1584029990001,
 };
 
-console.log(getSpecialNumbers([1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9]));*/
+/* 1. Выведи в консоль значение свойства 'currency' с помощью точки */
+console.log(transaction.currency);
 
-// task-1 long version
-/*
-const getSpecialNumbers = numbers => {
-    let SpecialNumbers = [];
+/* 2. Выведи в консоль значение свойства 'value' с помощью квадратных скобок */
+console.log(transaction['value']);
 
-    function checkIfSpecialNumber(num) {
-        if (num % 3 === 0) {
-            SpecialNumbers.push(num);
-        }
-    }
+/* 3. Выведи в консоль значение свойства обьекта transaction, название которого находится в переменной key - используй квадратные скобки */
+const key = 'operation';
+console.log(transaction[key]);
 
-    numbers.forEach(checkIfSpecialNumber);
+/* 4. Введи в консоль значение свойства 'company' используя квадратные скобки */
+console.log(transaction.agent['country']);
 
-    return SpecialNumbers;
-};
+/* 5. Выведи в консоль значение свойства 'country' используя точку */
+console.log(transaction.agent['company']);
 
-const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
-
-console.log(getSpecialNumbers(arr));*/
+/* 6. Выведи в консоль значение свойства 'operation time' используя квадратные скобки */
+console.log(transaction['operation time']);
