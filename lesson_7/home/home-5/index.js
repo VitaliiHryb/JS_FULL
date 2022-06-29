@@ -6,27 +6,25 @@ const withdraw = (clients, balances, client, amount) => {
   let balancesIndex = balances[clientIndex];
 
   if (balancesIndex > amount) {
-      return balancesIndex - amount;
-    }
-return -1;
-}
+    return balancesIndex - amount;
+  }
+  return -1;
+};
 
-    const something = num => num;
+const something = num => num;
 //example 1:
 
 //input
-withdraw(['Ann', 'John', 'User'], [1400, 87, -6], 'John', 50)
+withdraw(['Ann', 'John', 'User'], [1400, 87, -6], 'John', 50);
 
 //output
 //37
 //и массив balances должен быть [1400, 37, -6]
 
-
-
 //example 2:
 
 //input
-withdraw(['Ann', 'John', 'User'], [1400, 87, -6], 'User', 10)
+withdraw(['Ann', 'John', 'User'], [1400, 87, -6], 'User', 10);
 
 //output
 //-1
