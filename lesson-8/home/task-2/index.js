@@ -1,45 +1,27 @@
-// фильтрацияя массива
-// task-1 short
-const getSpecialNumbers = numbers =>
- numbers.filter(num => num % 3 === 0);
-
-
-const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
-
-console.log(getSpecialNumbers(arr));
-console.log(arr);
-
-// изменяет массив
-/*const getSpecialNumbers = numbers => {
-    let getSpecialNumbers = [];
-
-    for(let i = 0; i < numbers.length; i++) {
-        if (numbers[i] % 3 === 0) {
-            getSpecialNumbers.push(numbers[i]);
-        }
-    }
-
-    return getSpecialNumbers;
+const user = {
+  name: 'Tom',
+  age: 17,
 };
 
-console.log(getSpecialNumbers([1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9]));*/
+/* присвой объекту свойство hobby со значением 'football' с помощью точки */
+user.hobby = 'football';
 
-// task-1 long version
-/*
-const getSpecialNumbers = numbers => {
-    let SpecialNumbers = [];
+/* название свойства хранится в переменной anotherKey. Присвой объекту такое свойство со значением false */
+const anotherKey = 'married';
+user[anotherKey] = false;
 
-    function checkIfSpecialNumber(num) {
-        if (num % 3 === 0) {
-            SpecialNumbers.push(num);
-        }
-    }
+/* присвой объекту свойство 'favorite music' со значением 'rock' */
+user['favorite music'] = 'rock';
 
-    numbers.forEach(checkIfSpecialNumber);
+/* присвой объекту свойство 'address', которое будет пустым объкетом */
+user.address = {};
 
-    return SpecialNumbers;
-};
+/* присвой объекту в 'address' свойство 'country', со значением 'Ukraine' */
+user.address.country = 'Ukraine';
 
-const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
+/* присвой объекту в 'address' свойство 'building', со значением 17 */
+user.address.building = '17';
 
-console.log(getSpecialNumbers(arr));*/
+/* выведи в консоль итоговый объект user */
+
+console.log(user);
