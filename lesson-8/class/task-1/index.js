@@ -1,45 +1,19 @@
-// фильтрацияя массива
-// task-1 short
-const getSpecialNumbers = numbers =>
- numbers.filter(num => num % 3 === 0);
-
-
-const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
-
-console.log(getSpecialNumbers(arr));
-console.log(arr);
-
-// изменяет массив
-/*const getSpecialNumbers = numbers => {
-    let getSpecialNumbers = [];
-
-    for(let i = 0; i < numbers.length; i++) {
-        if (numbers[i] % 3 === 0) {
-            getSpecialNumbers.push(numbers[i]);
-        }
-    }
-
-    return getSpecialNumbers;
+// object creation
+const transformToObject = arr => {
+  let obj = {};
+  arr.forEach(element => {
+    obj[element] = element;
+  });
+  return obj;
 };
 
-console.log(getSpecialNumbers([1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9]));*/
+// examples
+transformToObject(['a', 17.1, 'John Doe']); // ==> { a: 'a', '17.1': 17.1, 'John Doe': 'John Doe' }
 
-// task-1 long version
-/*
-const getSpecialNumbers = numbers => {
-    let SpecialNumbers = [];
+// examples
+transformToObject(['a', 17.1, 'John Doe']); // ==> { a: 'a', '17.1': 17.1, 'John Doe': 'John Doe' });
 
-    function checkIfSpecialNumber(num) {
-        if (num % 3 === 0) {
-            SpecialNumbers.push(num);
-        }
-    }
+// const arr = [1, 2, 3, 4, 5, 6, 35, 34, 3, 4, 34, 34, 4, 3, 4, 3, 434, 3, 3, 5, 6, 9];
 
-    numbers.forEach(checkIfSpecialNumber);
-
-    return SpecialNumbers;
-};
-
-const arr = [1,2,3,4,5,6,35,34,3,4,34,34,4,3,4,3,434,3,3,5,6,9];
-
-console.log(getSpecialNumbers(arr));*/
+// console.log(trunsformToObject(arr));
+// console.log(arr);
