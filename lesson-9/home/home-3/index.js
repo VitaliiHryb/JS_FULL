@@ -1,32 +1,38 @@
-/* eslint-disable no-restricted-syntax */
+// Merge objects
+/* eslint-disable prefer-object-spread */
 
-/* Для решения этой задачи используй for..in цикл. В реальных проектах это плохая практика,
- * лучше использовать методы класса Object - keys(), values(), entries(). Но мы с ними пока не познакомитись.
- * Чтобы eslint не ругался на эту ошибку, для этой задачи он отключен аннотацией eslint-disable
+/* В решения этой задачи используется метод Object.assign. В реальных проектах для такой задачи
+ * лучше использовать spread опертор - это самый современный подход
+ *
+ * Задачу мы делаем для практики и демонстрационных целей, поэтому чтобы eslint не ругался на эту ошибку,
+ * для этой задачи он отключен аннотацией eslint-disable
  * */
 
-// используй for..in цикл.
+const mergeObjectsV1 = (obj1, obj2) => Object.assign(obj1, obj2);
 
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
+const mergeObjectsV2 = (obj1, obj2) => Object.assign(obj2, obj1);
 
-const getAdults = obj => {
-  let filterObj = {};
+const mergeObjectsV3 = (obj1, obj2) => Object.assign({ ...obj1 }, { ...obj2 });
 
-  const isAdult = old => old >= 18;
-
-  for (const key in obj) {
-    if (isAdult(obj[key])) {
-      filterObj[key] = obj[key];
-      // console.log(filterObj);
-    }
-  }
-  return filterObj;
-  //console.log(filterObj);
-};
+const mergeObjectsV4 = (obj1, obj2) => Object.assign({ ...obj2 }, { ...obj1 });
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe': 19, Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+const obj1 = {
+  name: 'Tom',
+  age: 17,
+};
+
+const obj2 = {
+  name: 'Bob',
+  student: false,
+};
+
+mergeObjectsV1(obj1, obj2); // ==> { name: 'Bob', age: 17, student: false }
+mergeObjectsV2(obj1, obj2); // ==> { name: 'Tom', age: 17, student: false }
+mergeObjectsV3(obj1, obj2); // ==> { name: 'Bob', age: 17, student: false }
+mergeObjectsV4(obj1, obj2); // ==> { name: 'Tom', age: 17, student: false }
+
+// console.log(mergeObjectsV1(obj1, obj2)); // ==> { name: 'Bob', age: 17, student: false }
+// console.log(mergeObjectsV2(obj1, obj2)); // ==> { name: 'Tom', age: 17, student: false }
+// console.log(mergeObjectsV3(obj1, obj2)); // ==> { name: 'Bob', age: 17, student: false }
+// console.log(mergeObjectsV4(obj1, obj2)); // ==> { name: 'Tom', age: 17, student: false }
