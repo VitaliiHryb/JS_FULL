@@ -5,14 +5,26 @@
  * Чтобы eslint не ругался на эту ошибку, для этой задачи он отключен аннотацией eslint-disable
  * */
 
+// используй for..in цикл.
+
+// пройтись циклом по обьекту
+// проверить условие value >= 18
+// записать в обьект key : velue удовлетворяющие условие
+// вернуть новый обьект
+
 const getAdults = obj => {
-  const res = {};
-  for (const value of Object.values(obj)) {
-    if (value >= 18) {
-      res[value] = Object.assign({}, obj[value]);
+  let filterObj = {};
+
+  const isAdult = old => old >= 18;
+
+  for (const key in obj) {
+    if (isAdult(obj[key])) {
+      filterObj[key] = obj[key];
+      // console.log(filterObj);
     }
   }
-  return res;
+  return filterObj;
+  //console.log(filterObj);
 };
 
 // examples
