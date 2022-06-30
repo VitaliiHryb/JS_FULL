@@ -5,14 +5,19 @@
 // записать в обьект key : velue удовлетворяющие условие
 // вернуть новый обьект
 
-const getAdults = usersObj => {
-  const usersArray = Object.entries(usersObj);
-  const filteredUserArray = usersArray.filter(user => user[1] >= 18);
+const getAdults = usersObj =>
+  Object.entries(usersObj)
+    .filter(user => user[1] >= 18)
+    .map(user => user[0]);
 
-  const usersNames = filteredUserArray.map(user => user[0]);
+// const getAdults = usersObj => {
+//   const result = Object.entries(usersObj);
+//   const filteredUserArray = result.filter(user => user[1] >= 18);
 
-  return usersNames;
-};
+//   const usersNames = filteredUserArray.map(user => user[0]);
+
+//   return usersNames;
+// };
 
 // examples
 console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe', Bob: 18 }

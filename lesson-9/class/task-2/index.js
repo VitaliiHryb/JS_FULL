@@ -12,21 +12,8 @@
 // записать в обьект key : velue удовлетворяющие условие
 // вернуть новый обьект
 
-const getAdults = obj => {
-  let filterObj = {};
-
-  const isAdult = old => old >= 18;
-
-  for (const key in obj) {
-    if (isAdult(obj[key])) {
-      filterObj[key] = obj[key];
-      // console.log(filterObj);
-    }
-  }
-  return filterObj;
-  //console.log(filterObj);
-};
+const copyObj = obj => {};
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe': 19, Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+console.log(copyObj({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe': 19, Bob: 18 }
+console.log(copyObj({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
