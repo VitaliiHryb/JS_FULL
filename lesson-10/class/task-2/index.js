@@ -1,39 +1,32 @@
-// Object - keys(), values(), entries().
+// Парсинг чисел
+const getParsedIntegers = arr => arr.map(el => Number.parseInt(el));
 
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
+const getParsedIntegersV2 = arr => arr.map(el => parseInt(el));
 
-const getAdults = usersObj =>
-  Object.entries(usersObj)
-    .filter(user => user[1] >= 18)
-    .map(user => user[0]);
+const getParsedFloats = arr => arr.map(el => Number.parseFloat(el));
 
-// const getAdults = usersObj => {
-//   const result = Object.entries(usersObj);
-//   const filteredUserArray = result.filter(user => user[1] >= 18);
+const getParsedFloatsV2 = arr => arr.map(el => parseFloat(el));
 
-//   const usersNames = filteredUserArray.map(user => user[0]);
+const elementList = [12, 0, undefined, -5, '33kl', [], Infinity, -54.4];
+console.log(getParsedIntegers(elementList));
+console.log(getParsedIntegersV2(elementList));
+console.log(getParsedFloats(elementList));
+console.log(getParsedFloatsV2(elementList));
 
-//   return usersNames;
+// parseInt()
+// Number.parseInt()
+// parseFloat()
+// Number.parseFloat()
+
+// parseInt() === Number.parseInt()
+// parseFloat() === Number.parseFloat()
+
+// const parseArray = arr => {
+//   const result = arr.map(el => Number.parseFloat(el));
+//
+//   return result;
 // };
 
-// examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe', Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
-
-// const getAdults = obj => {
-//   let filterObj = {};
-
-//   const isAdult = old => old >= 18;
-
-//   for (const key in obj) {
-//     if (isAdult(obj[key])) {
-//       filterObj[key] = obj[key];
-//       // console.log(filterObj);
-//     }
-//   }
-//   return filterObj;
-//   //console.log(filterObj);
-// };
+// const elementList = [12, 0, undefined, -5, '33kl', [], Infinity, -54.4];
+// const parseArray = arr => arr.map(el => Number.parseFloat(el));
+// console.log(parseArray(elementList));
