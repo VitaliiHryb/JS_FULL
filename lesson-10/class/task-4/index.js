@@ -1,39 +1,30 @@
-// Object - keys(), values(), entries().
+// Max absolute number
+// 1. get absolute valiues
+// 2. find max
 
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
-
-const getAdults = usersObj =>
-  Object.entries(usersObj)
-    .filter(user => user[1] >= 18)
-    .map(user => user[0]);
-
-// const getAdults = usersObj => {
-//   const result = Object.entries(usersObj);
-//   const filteredUserArray = result.filter(user => user[1] >= 18);
-
-//   const usersNames = filteredUserArray.map(user => user[0]);
-
-//   return usersNames;
-// };
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+const getMaxAbsoluteNumber = arr => {
+  if (!Array.isArray(arr) || arr.length < 1) return null;
+  const absoluteValues = arr.map(num => Math.abs(num));
+  return Math.max(...absoluteValues);
+};
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe', Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+getMaxAbsoluteNumber([-10, 10, -10]); // ===> 10
+getMaxAbsoluteNumber([2.1, 0, 1.6]); // ===> 2.1
+getMaxAbsoluteNumber([-6, 3, 5, -1]); // ===> 6
+getMaxAbsoluteNumber([-777, 3, -1, 45, -20]); // ===> 777
 
-// const getAdults = obj => {
-//   let filterObj = {};
-
-//   const isAdult = old => old >= 18;
-
-//   for (const key in obj) {
-//     if (isAdult(obj[key])) {
-//       filterObj[key] = obj[key];
-//       // console.log(filterObj);
+// const getMaxAbsoluteNumber = arr => {
+//   let max = -Infinity;
+//   arr.forEach(num => {
+//     if (Math.abs(num) > max) {
+//       max = Math.abs(num);
 //     }
-//   }
-//   return filterObj;
-//   //console.log(filterObj);
+//   });
+
+//   return max;
 // };
