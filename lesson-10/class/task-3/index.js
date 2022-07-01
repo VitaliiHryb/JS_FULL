@@ -1,39 +1,38 @@
-// Object - keys(), values(), entries().
+// Rounding numbers
 
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
+/**
+ * @param {number} num
+ * @return {number[]}
+ */
 
-const getAdults = usersObj =>
-  Object.entries(usersObj)
-    .filter(user => user[1] >= 18)
-    .map(user => user[0]);
+// num => []
 
-// const getAdults = usersObj => {
-//   const result = Object.entries(usersObj);
-//   const filteredUserArray = result.filter(user => user[1] >= 18);
-
-//   const usersNames = filteredUserArray.map(user => user[0]);
-
-//   return usersNames;
-// };
+// const multiRound = num => [Math.round(num), Math.floor(num), Math.ceil(num), Math.trunc(num)];
+const multiRound = num => [
+  Math.floor(num * 100) / 100,
+  Math.trunc(num * 100) / 100,
+  Math.ceil(num * 100) / 100,
+  Math.round(num * 100) / 100,
+  +num.toFixed(2),
+];
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe', Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+multiRound(11.12556); // ==> [11.12, 11.12, 11.13, 11.13, 11.13]
+multiRound(6.112); // ==> [6.11, 6.11, 6.12, 6.11, 6.11]
 
-// const getAdults = obj => {
-//   let filterObj = {};
+// 0.1 + 0.2 === 0.3
 
-//   const isAdult = old => old >= 18;
+// Math.ceil()
+// Math.floor();
+// Math.round();
+// Math.trunc();
 
-//   for (const key in obj) {
-//     if (isAdult(obj[key])) {
-//       filterObj[key] = obj[key];
-//       // console.log(filterObj);
-//     }
-//   }
-//   return filterObj;
-//   //console.log(filterObj);
-// };
+// Math.abc();
+// Math.max();
+// Math.min();
+
+// Math.pow();
+// Math.sqrt();
+
+// toFixed(n)
+// Math.PI.toFixed(3); // '3.142'
