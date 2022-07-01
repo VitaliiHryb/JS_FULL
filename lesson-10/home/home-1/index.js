@@ -1,39 +1,29 @@
-// Object - keys(), values(), entries().
+// Max absolute number
+// 1. get absolute valiues
+// 2. find max
 
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
-
-const getAdults = usersObj =>
-  Object.entries(usersObj)
-    .filter(user => user[1] >= 18)
-    .map(user => user[0]);
-
-// const getAdults = usersObj => {
-//   const result = Object.entries(usersObj);
-//   const filteredUserArray = result.filter(user => user[1] >= 18);
-
-//   const usersNames = filteredUserArray.map(user => user[0]);
-
-//   return usersNames;
-// };
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+const getTotalPrice = arr =>
+  '$' +
+  (
+    Math.floor(arr.reduce((previousValue, currentValue) => previousValue + currentValue) * 100) /
+    100
+  ).toFixed(2);
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe', Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+getTotalPrice([-10, 10, -10]); // ===> 10
+getTotalPrice([2.1, 0, 1.6]); // ===> 2.1
+getTotalPrice([-6, 3, 5, -1]); // ===> 6
+getTotalPrice([-777, 3, -1, 45, -20]); // ===> 777
 
-// const getAdults = obj => {
-//   let filterObj = {};
-
-//   const isAdult = old => old >= 18;
-
-//   for (const key in obj) {
-//     if (isAdult(obj[key])) {
-//       filterObj[key] = obj[key];
-//       // console.log(filterObj);
-//     }
-//   }
-//   return filterObj;
-//   //console.log(filterObj);
+// const getTotalPrice = arr => {
+//   const sum = Math.abs(arr.reduce((acc, num) => acc + num, 0));
+//   const result = '$' + sum.toFixed(2);
+//   return result;
+//   // console.log(result);
 // };
+
+// if (!Array.isArray(arr) || arr.length < 1) return null;
