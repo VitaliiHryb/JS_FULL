@@ -1,32 +1,34 @@
-/* eslint-disable no-restricted-syntax */
+//Посчитать баланс по всем транзакциям
 
-/* Для решения этой задачи используй for..in цикл. В реальных проектах это плохая практика,
- * лучше использовать методы класса Object - keys(), values(), entries(). Но мы с ними пока не познакомитись.
- * Чтобы eslint не ругался на эту ошибку, для этой задачи он отключен аннотацией eslint-disable
- * */
-
-// используй for..in цикл.
-
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
-
-const getAdults = obj => {
-  let filterObj = {};
-
-  const isAdult = old => old >= 18;
-
-  for (const key in obj) {
-    if (isAdult(obj[key])) {
-      filterObj[key] = obj[key];
-      // console.log(filterObj);
-    }
-  }
-  return filterObj;
-  //console.log(filterObj);
+// алгоритм
+// 1. пройтись по усім елементам массива, щоб отримати values of amounts
+// 2. просумувати усі amount
+const getTotalRevenue = transactions => {
+  const arr = [];
+  let result = 0;
+  transactions.forEach(element => arr.push(element.amount));
+  arr.forEach(amountElement => (result += amountElement));
+  return result;
 };
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe': 19, Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+const dayTransactions = [
+  { userId: 22, amount: 60, operation: 'sell' },
+  { userId: 22, amount: 160, operation: 'buy' },
+  { userId: 44, amount: 90, operation: 'sell' },
+];
+
+const result = getTotalRevenue(dayTransactions); // ==> 310
+// console.log(getTotalRevenue(dayTransactions)); // ==> 310
+
+// const getTotalRevenue = transactions => {
+//   const arr = [];
+//   let result = 0;
+//   transactions.forEach(element => {
+//     arr.push(element.amount);
+//   });
+//   arr.forEach(element => {
+//     result += element;
+//   });
+//   return result;
+// };
