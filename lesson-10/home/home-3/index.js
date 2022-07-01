@@ -1,4 +1,4 @@
-'use strict';
+// Rounding numbers with precision
 
 /**
  * @param {number} num
@@ -6,7 +6,14 @@
  * @return {number[]}
  */
 const superRound = (num, prec) => {
-  // put your code here
+  const precision = 10 ** prec;
+  return [
+    Math.floor(num * precision) / precision,
+    Math.trunc(num * precision) / precision,
+    Math.ceil(num * precision) / precision,
+    Math.round(num * precision) / precision,
+    +num.toFixed(prec),
+  ];
 };
 
 // examples
