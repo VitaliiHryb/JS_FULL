@@ -6,6 +6,8 @@ Abc Abcd
 
 // 1. 'abcdefg', 4 => ['abcd', 'efg'] => ['Abcd', 'Efg']
 // => 'Abcd/nEfg'
+// null if text != string
+// функция должна делится на подстроки длинной 10 символов, если не задан второй аргумент
 
 const splitText = (text, len = 10) => {
   if (typeof text !== 'string') {
@@ -27,7 +29,7 @@ const splitText = (text, len = 10) => {
   return strArr.join('\n');
 };
 
-console.log(splitText('abcdefg'), 4);
+console.log(splitText('abcdefg', 4));
 
 // // `I'm a student`
 // // 'I`m a student'
