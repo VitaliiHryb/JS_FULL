@@ -1,96 +1,49 @@
-// Проверка чисел
-const getFiniteNumbers = arr => arr.filter(Number.isFinite);
+// Разбить текст на строки
+/*'Abcd\n efg\nH' =>
+Abc Abcd
+  efg
+    H*/
 
-const getFiniteNumbersV2 = arr => arr.filter(isFinite);
+// 1. 'abcdefg', 4 => ['abcd', 'efg'] => ['Abcd', 'Efg']
+// => 'Abcd/nEfg'
 
-const getNaN = arr => arr.filter(Number.isNaN);
+const splitText = (text, len = 10) => {
+  if (typeof text !== 'string') {
+    return null;
+  }
 
-const getNaNV2 = arr => arr.filter(isNaN);
+  const strArr = [];
+  let startPosition = 0;
 
-const getIntegers = arr => arr.filter(Number.isInteger);
+  while (true) {
+    let chunk = text.substr(startPosition, len);
+    if (chunk.length === 0) {
+      break;
+    }
+    strArr.push(chunk[0].toUpperCase() + chunk.slice(1));
+    startPosition += len;
+  }
 
-console.log(getFiniteNumbers([12, 0, -5, '33', [], Infinity, -54.4]));
-console.log(getFiniteNumbersV2([12, 0, -5, '33', [], Infinity, -54.4]));
-console.log(getNaN([12, 0, -5, '33', [], Infinity, -54.4]));
-console.log(getNaNV2([12, 0, -5, '33', [], Infinity, -54.4]));
-console.log(getIntegers([12, 0, -5, '33', [], Infinity, -54.4]));
+  return strArr.join('\n');
+};
 
-// Number.isNaN('text');
-// isNaN('text');
-// isNaN(NaN);
-// Number.isNaN(NaN);
+console.log(splitText('abcdefg'), 4);
 
-// Number.isFinite('17');
-// isFinite('27');
+// // `I'm a student`
+// // 'I`m a student'
 
-// parseInt(' 17.17text');
-// Number.parseInt(' 17.17text');
-// Number.parseInt('seventeen');
+// const text = 'message';
 
-// parseFloat(' 17.17text');
-// Number.parseFloat(' 17.17text');
-// Number.parseFloat('seventeen');
+// const myMessage = `
+//   The text is ${text.toUpperCase()},
+//   And something else.
+// `;
 
-// Number.isInteger(17);
-// Number.isInteger(17.0);
-// Number.isInteger(17.17);
-// Number.isInteger('17');
-// Number.isInteger(Infinity);
-// Number.isInteger(NaN);
-// Number.isInteger(undefined);
-// Number.isInteger(null);
+// // console.log(myMessage);
+// // console.log(text[text.length - 1]);
+// console.log(text.charAt(text.length - 1));
 
-// // 1.
-// const getFiniteNumbers = arr => {
-//   const result = [];
-//   arr.forEach(num => {
-//     if (Number.isFinite(num)) {
-//       result.push(num);
-//     }
-//     return result;
-//   });
-// };
+// // text[2] = 'Q' - can not change string
 
-// // 2.
-// const getFiniteNumbersV2 = arr => {
-//   const result = [];
-//   arr.forEach(num => {
-//     if (num.isFinite) {
-//       result.push(num);
-//     }
-//     return result;
-//   });
-// };
-
-// // 3.
-// const getNaN = arr => {
-//   const result = [];
-//   arr.forEach(num => {
-//     if (Number.isNaN(num)) {
-//       result.push(num);
-//     }
-//     return result;
-//   });
-// };
-
-// // 4.
-// const getNaNV2 = arr => {
-//   const result = [];
-//   arr.forEach(num => {
-//     if (isNaN(num)) {
-//       result.push(num);
-//     }
-//     return result;
-//   });
-// };
-
-// // 5.
-// const getIntegers = arr => {
-//   const result = [];
-//   arr.forEach(num => {
-//     if (Number.isInteger(num)) {
-//       result.push(num);
-//     }
-//     return result;
-//   });
-// };
+// text.split('e');
+// console.log(text);
