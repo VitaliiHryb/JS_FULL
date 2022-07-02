@@ -1,25 +1,23 @@
-const randomNum = (min, max) => Math.random() * (max - min) + min;
+// Count occurences
 
-const getRandomNumbers = (length, from, to) => {
-  if (Math.abs(from - to) < 1) return null;
-  let result = [];
-  for (let i = 0; i < length; i++) {
-    result.push(Math.floor(randomNum(from, to)));
+const countOccurrences = (text, str) => {
+  if (str === '') {
+    return null;
   }
-  return result;
-  //console.log(result);
+
+  let startPosition = -1;
+  let count = 0;
+  while (true) {
+    startPosition = text.indexOf(str, startPosition + 1);
+    if (startPosition === -1) {
+      break;
+    }
+
+    count += 1;
+  }
+  return count;
 };
 
-// examples
-getRandomNumbers(5, 1.4, 3.22); // ==> [2, 2, 2, 3, 2]
-getRandomNumbers(5, 1.4, 3.22); // ==> [3, 2, 2, 2, 2]
-getRandomNumbers(5, 1.4, 3.22); // ==> [3, 3, 2, 3, 2]
-
-// Math.floor()
-// const newArr = []
-// arr.length = length
-// Math.random() * (max - min) + min
-
-// 1. check if it isn't integer numbers from to
-// 2. random number generation //let numbers = randomNum(from, to);
-// 3. push random numbers in array
+console.log(countOccurrences('abcdefg', 'a'));
+console.log(countOccurrences('abcdefg', 'b'));
+console.log(countOccurrences('abccdefg', 'bcc'));
