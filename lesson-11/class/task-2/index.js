@@ -1,32 +1,41 @@
-// Парсинг чисел
-const getParsedIntegers = arr => arr.map(el => Number.parseInt(el));
+// sortContacts
 
-const getParsedIntegersV2 = arr => arr.map(el => parseInt(el));
+const sortContacts = (contacts, isAsc) => {
+  if (!Array.isArray(contacts)) return null;
+  const result = [...contacts];
+  if (isAsc === true || isAsc === undefined) result.sort((a, b) => a.name.localeCompare(b.name));
+  else result.sort((a, b) => b.name.localeCompare(a.name));
+  return result;
+};
 
-const getParsedFloats = arr => arr.map(el => Number.parseFloat(el));
+const contactsArr = [
+  {
+    name: 'Tom',
+    phoneNumber: '666-66-66',
+  },
+  {
+    name: 'John',
+    phoneNumber: '555-55-55',
+  },
+  {
+    name: 'Ann',
+    phoneNumber: '444-44-44',
+  },
+  {
+    name: 'Stepan',
+    phoneNumber: '333-33-33',
+  },
+  {
+    name: 'Suzy',
+    phoneNumber: '222-22-22',
+  },
+  {
+    name: 'Adel',
+    phoneNumber: '111-11-11',
+  },
+];
 
-const getParsedFloatsV2 = arr => arr.map(el => parseFloat(el));
-
-const elementList = [12, 0, undefined, -5, '33kl', [], Infinity, -54.4];
-console.log(getParsedIntegers(elementList));
-console.log(getParsedIntegersV2(elementList));
-console.log(getParsedFloats(elementList));
-console.log(getParsedFloatsV2(elementList));
-
-// parseInt()
-// Number.parseInt()
-// parseFloat()
-// Number.parseFloat()
-
-// parseInt() === Number.parseInt()
-// parseFloat() === Number.parseFloat()
-
-// const parseArray = arr => {
-//   const result = arr.map(el => Number.parseFloat(el));
-//
-//   return result;
-// };
-
-// const elementList = [12, 0, undefined, -5, '33kl', [], Infinity, -54.4];
-// const parseArray = arr => arr.map(el => Number.parseFloat(el));
-// console.log(parseArray(elementList));
+console.log(sortContacts(11, true));
+console.log(sortContacts(contactsArr, true));
+console.log(sortContacts(contactsArr, false));
+// 'a'charCodeAt(0);
