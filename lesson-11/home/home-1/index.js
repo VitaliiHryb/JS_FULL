@@ -1,29 +1,35 @@
-// Max absolute number
-// 1. get absolute valiues
-// 2. find max
+// Разбить строку на подстроки (Split string into substrings)
 
-/**
- * @param {number[]} arr
- * @return {number}
- */
-const getTotalPrice = arr =>
-  '$' +
-  (
-    Math.floor(arr.reduce((previousValue, currentValue) => previousValue + currentValue) * 100) /
-    100
-  ).toFixed(2);
+// num указывает количество символов в каждой подстроке
+// return [подстрока, подстрока, ... подстрока]
+// добавить точку '.' в последнюю подстроку
 
-// examples
-getTotalPrice([-10, 10, -10]); // ===> 10
-getTotalPrice([2.1, 0, 1.6]); // ===> 2.1
-getTotalPrice([-6, 3, 5, -1]); // ===> 6
-getTotalPrice([-777, 3, -1, 45, -20]); // ===> 777
+// Algorithm
+// 1. Text ? string, if not => null
+// 2. empty array for result and startPosition for push
+// 3. returns a portion of the string (we need 4)
+// 4. add '.' to a last chunk
+// 5. push our ortion of the string in empty array
 
-// const getTotalPrice = arr => {
-//   const sum = Math.abs(arr.reduce((acc, num) => acc + num, 0));
-//   const result = '$' + sum.toFixed(2);
-//   return result;
-//   // console.log(result);
-// };
+const splitString = (text, length = 10) => {
+  if (typeof text !== 'string') {
+    return null;
+  }
+  const strArr = [];
+  let startPosition = 0;
+  while (true) {
+    let chunk = text.substr(startPosition, length);
+    if (chunk.length === 0) {
+      break;
+    }
+    if (chunk.length < length) {
+      chunk = chunk.concat('.'.repeat(length - chunk.length));
+    }
+    strArr.push(chunk);
+    startPosition += length;
+  }
+  return strArr;
+};
 
-// if (!Array.isArray(arr) || arr.length < 1) return null;
+// console.log(splitString('abcd efghi', 4));
+// console.log(splitString('abcdefghi', 4));
