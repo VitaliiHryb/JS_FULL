@@ -10,18 +10,32 @@
  * для этой задачи он отключен аннотацией eslint-disable
  * */
 
+// input: object, key and value
+// output: new object
+
 function addPropertyV1(obj, key, value) {
-  // put your code here
+  obj[key] = value;
+  return obj;
 }
 
-// put your code here
+function addPropertyV2(obj, key, value) {
+  return Object.assign(obj, { [key]: value });
+}
 
-// put your code here
+function addPropertyV3(obj, key, value) {
+  return Object.assign({}, obj, { [key]: value });
+}
 
-// put your code here
+function addPropertyV4(obj, key, value) {
+  return { ...obj, [key]: value };
+}
 
 // examples
 const transaction = {
   value: 170,
 };
+
 addPropertyV1(transaction, 'currency', 'USD'); // ==> { value: 170, currency: 'USD' }
+addPropertyV2(transaction, 'currency', 'EUR'); // ==> { value: 170, currency: 'USD' }
+addPropertyV3(transaction, 'currency', 'UAH'); // ==> { value: 170, currency: 'USD' }
+addPropertyV4(transaction, 'currency', 'Pound'); // ==> { value: 170, currency: 'USD' }

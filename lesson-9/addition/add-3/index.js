@@ -1,32 +1,64 @@
-/* eslint-disable no-restricted-syntax */
+// input: objects
+// output: boolian
 
-/* Для решения этой задачи используй for..in цикл. В реальных проектах это плохая практика,
- * лучше использовать методы класса Object - keys(), values(), entries(). Но мы с ними пока не познакомитись.
- * Чтобы eslint не ругался на эту ошибку, для этой задачи он отключен аннотацией eslint-disable
- * */
-
-// используй for..in цикл.
-
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
-
-const getAdults = obj => {
-  let filterObj = {};
-
-  const isAdult = old => old >= 18;
-
-  for (const key in obj) {
-    if (isAdult(obj[key])) {
-      filterObj[key] = obj[key];
-      // console.log(filterObj);
+function compareObjects(obj1, obj2) {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
     }
   }
-  return filterObj;
-  //console.log(filterObj);
-};
+  return true;
+}
 
 // examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe': 19, Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+const obj1 = {
+  name: 'Tom',
+  age: 17,
+};
+
+const obj2 = {
+  name: 'Bob',
+  age: 17,
+};
+
+const obj3 = {
+  name: 'Bob',
+  age: 17,
+  student: false,
+};
+
+const obj4 = {
+  name: 'Tom',
+  age: 17,
+};
+
+console.log(compareObjects(obj1, obj2)); // ==> false
+console.log(compareObjects(obj2, obj3)); // ==> false
+console.log(compareObjects(obj1, obj4)); // ==> true
+
+// function deepEqual(object1, object2) {
+//   const keys1 = Object.keys(object1);
+//   const keys2 = Object.keys(object2);
+//   if (keys1.length !== keys2.length) {
+//     return false;
+//   }
+//   for (const key of keys1) {
+//     const val1 = object1[key];
+//     const val2 = object2[key];
+//     const areObjects = isObject(val1) && isObject(val2);
+//     if (
+//       areObjects && !deepEqual(val1, val2) ||
+//       !areObjects && val1 !== val2
+//     ) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+// function isObject(object) {
+//   return object != null && typeof object === 'object';

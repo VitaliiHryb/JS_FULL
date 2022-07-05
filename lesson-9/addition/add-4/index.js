@@ -1,32 +1,52 @@
-/* eslint-disable no-restricted-syntax */
+// input: object
+// output: array
 
-/* Для решения этой задачи используй for..in цикл. В реальных проектах это плохая практика,
- * лучше использовать методы класса Object - keys(), values(), entries(). Но мы с ними пока не познакомитись.
- * Чтобы eslint не ругался на эту ошибку, для этой задачи он отключен аннотацией eslint-disable
- * */
-
-// используй for..in цикл.
-
-// пройтись циклом по обьекту
-// проверить условие value >= 18
-// записать в обьект key : velue удовлетворяющие условие
-// вернуть новый обьект
-
-const getAdults = obj => {
-  let filterObj = {};
-
-  const isAdult = old => old >= 18;
-
-  for (const key in obj) {
-    if (isAdult(obj[key])) {
-      filterObj[key] = obj[key];
-      // console.log(filterObj);
-    }
-  }
-  return filterObj;
-  //console.log(filterObj);
+const getCustomersList = obj => {
+  Object.entries(obj)
+    .map(([id, customer]) => ({ id, ...customer }))
+    .sort((a, b) => (a.age > b.age ? 1 : -1));
 };
 
-// examples
-console.log(getAdults({ 'John Doe': 19, Tom: 17, Bob: 18 })); // ==> { 'John Doe': 19, Bob: 18 }
-console.log(getAdults({ Ann: 56, Andrey: 7 })); // ==> { Ann: 56 }
+const customers = {
+  'customers-id-1': {
+    name: 'William',
+    age: 54,
+  },
+  'customers-id-2': {
+    name: 'Tom',
+    age: 17,
+  },
+  'customers-id-3': {
+    name: 'Ann',
+    age: 16,
+  },
+};
+
+console.log(getCustomersList(customers)); /* =>
+[
+  {
+    name: 'Ann',
+    age: 16,
+    id: 'customers-id-3'
+  },
+  {
+    name: 'Tom',
+    age: 17,
+    id: 'customers-id-2'
+  },
+  {
+    name: 'William',
+    age: 54,
+    id: 'customers-id-1'
+  },
+]
+*/
+
+// const getCustomersList = obj => {
+//   const result = [];
+//   const obj1 = Object.values(obj);
+//   obj1.forEach(element => {
+//     result.push(element.name);
+//   });
+//   return result;
+// };
