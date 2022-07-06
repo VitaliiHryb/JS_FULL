@@ -1,39 +1,77 @@
-/*
- * ф-ция getSenseOfLife не должна принимать аргументы
- * ф-ция getSenseOfLife должна вернуть число 42
+'use strict';
+
+/**
+ * @return {object}
  */
 
-// ... code here
+const createMessenger = () => {
+  let message = 'Just learn it';
+  let name;
+  let sender = 'Gromcode';
 
-/* ф-ция getSquared должна принимать число и вернуть квадрат этого числа */
+  // Hello, Anna! Just learn it! This message was sent by Gromcode
+  function sendMessage(nam) {
+    name = nam;
+    console.log(`Hello, ${name}! ${message}! This message was sent by ${sender}`);
+  }
 
-// ... code here
+  function setMessage(text) {
+    message = text;
+  }
 
-/* ф-ция sum должна принимать два числа и вернуть их сумму */
+  function setSender(sentIt) {
+    sender = sentIt;
+  }
 
-// ... code here
+  // console.log(`Hello, ${name} ${message}! This message was sent by ${sender}`);
 
-/*
- * ф-ция sum должна принимать число
- * ф-ция sum должна вывести в консоль строку 'I am 34 years old'
- * где 34 - число, полученное в аргументах
- */
+  return {
+    sendMessage,
+    setMessage,
+    setSender,
+  };
+};
 
-// ... code here
+// export default createMessenger;
 
-/* ======> Arrow functions <======= */
+// examples
+const messanger1 = createMessenger();
+messanger1.sendMessage('Anna'); // ===> Hello, Anna! Just learn it! This message was sent by Gromcode
 
-/* ф-ция mult должна принимать два числа и вернуть их произведение */
+const messanger2 = createMessenger();
+messanger2.setMessage('You are learning JS and you do it well');
+messanger2.sendMessage('Michael'); // ===> Hello, Michael! You are learning JS and you do it well! This message was sent by Gromcode
 
-// ... code here
+const messanger3 = createMessenger();
+messanger3.setMessage('The weather is amazing today');
+messanger3.setSender('Anna');
+messanger3.sendMessage('Alex'); // ===> Hello, Alex! The weather is amazing today! This message was sent by Anna
 
-/* ф-ция square должна принимать число и вернуть его, возведенное в квадрат */
+// messeger
 
-// ... code here
+// const createMesseger = () => {
+//   let message = 'Hi!';
 
-/*
- * ф-ция getMagicNumber не должна принимать аргументы
- * ф-ция getMagicNumber должна вернуть число 17
- */
+//   function sendMessage(name) {
+//     const sender = 'Your Gromcode';
+//     console.log(`${name}, ${message} ${sender}`);
+//   }
 
-// ... code here
+//   function setMessage(text) {
+//     message = text;
+//   }
+
+//   return {
+//     sendMessage,
+//     setMessage,
+//   };
+// };
+
+// const messeger1 = createMesseger();
+// messeger1.sendMessage('Bob');
+
+// const messeger2 = createMesseger();
+// messeger2.sendMessage('Tom');
+
+// messeger2.setMessage('Hello!');
+// messeger1.sendMessage('Ann');
