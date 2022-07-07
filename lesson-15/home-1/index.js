@@ -1,31 +1,32 @@
-// Лексическое окружение
+// Фабрика калькуляторов с памятью
+// input: -
+// output: Obj with methods (odd, decrease, reset, getMenu)
 
-// setMessage
-'use strict';
+const createCalculator = () => {
+  let result = 0;
 
-let message = 'Just learn it!';
+  function add(num) {
+    result += num;
+  }
 
-export function sendMessage(name) {
-  console.log(`${name}, ${message} Your Gromcode`);
-}
+  function decrease(num) {
+    result -= num;
+  }
 
-export function setMessage(text) {
-  message = text;
-}
+  function reset() {
+    result = 0;
+  }
 
-// sendMessage('Tom');
-// sendMessage('Hello');
-// sendMessage('Tom');
+  function getMemo() {
+    return result;
+  }
 
-// another.js
+  return {
+    add,
+    decrease,
+    reset,
+    getMemo,
+  };
+};
 
-// import {setMessage} from 'index.js;
-// let message = 'Bay';
-// setMessage('Bob');
-
-// const message = 'Just learn it!';
-// const setMessage = name => {
-//   const sender = 'Gromecode';
-//   console.log(`${name}, ${message} You ${sender}`);
-// };
-// setMessage('Tom');
+export { createCalculator };
