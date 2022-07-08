@@ -1,21 +1,40 @@
-// var головоломка
-/* eslint-disable */
+// Переадресация вызова // Call forwarding
 
-/* Начальный код для этой задачи написан с плохими практиками, такими как использования var, 
-переопределение переменной и тд. Это сделано намерено чтобы разобрать работу var.
-Чтобы eslint не ругался на ошибки, для этой задачи он отключен аннотацией eslint-disable */
+// defer(func, ms) => function
 
-var foo = 1;
-
-function bar() {
-  if (!foo) {
-    let foo = 10;
-  }
-
-  return foo;
+function defer(func, ms) {
+  return function () {
+    // setTimeout(func, ms);
+    // setTimeout(() => func.call(this, ...arguments), ms);
+    setTimeout(() => func.apply(this, arguments), ms);
+  };
 }
 
-var foo = bar();
+export { defer };
 
-export default foo;
-// export default { foo };
+// const sayHi = () => {
+//   console.log('Hi');
+// };
+
+// const deferredSayHi = defer(sayHi, 1000);
+// deferredSayHi();
+
+// const sum = (a, b) => {
+//   console.log(a + b);
+// };
+
+const user = {
+  name: 'Tom',
+  sayHi() {
+    console.log(`Hi, I'm ${this.name}!`);
+  },
+};
+
+// const deferredSum = defer(sum, 1000);
+// deferredSum(1, 4);
+
+// const deferredHi = defer(user.sayHi.bind(user), 1000);
+// deferredHi();
+
+const deferredHi = defer(user.sayHi, 1000);
+deferredHi.call({ name: 'Bob' });
