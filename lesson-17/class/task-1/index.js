@@ -1,21 +1,24 @@
-// var головоломка
-/* eslint-disable */
+// method
 
-/* Начальный код для этой задачи написан с плохими практиками, такими как использования var, 
-переопределение переменной и тд. Это сделано намерено чтобы разобрать работу var.
-Чтобы eslint не ругался на ошибки, для этой задачи он отключен аннотацией eslint-disable */
+const user = {
+  firstName: 'John',
+  lastName: 'Doe',
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
 
-var foo = 1;
+export { user };
 
-function bar() {
-  if (!foo) {
-    let foo = 10;
-  }
+// user.getFullName();
 
-  return foo;
-}
-
-var foo = bar();
-
-export default foo;
-// export default { foo };
+// const user = {
+//   name: 'John',
+//   age: 17,
+//   walk(distance) {
+//     console.log(`I'm walking for a ${distance} km`);
+//   },
+//   sayHi() {
+//     console.log(`Hi, I am ${this.name}`);
+//   },
+// };
