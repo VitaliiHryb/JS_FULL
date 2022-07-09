@@ -1,40 +1,34 @@
-// Переадресация вызова // Call forwarding
-
-// defer(func, ms) => function
-
-function defer(func, ms) {
-  return function () {
-    // setTimeout(func, ms);
-    // setTimeout(() => func.call(this, ...arguments), ms);
-    setTimeout(() => func.apply(this, arguments), ms);
-  };
-}
-
-export { defer };
-
-// const sayHi = () => {
-//   console.log('Hi');
-// };
-
-// const deferredSayHi = defer(sayHi, 1000);
-// deferredSayHi();
-
-// const sum = (a, b) => {
-//   console.log(a + b);
-// };
+// Полное имя
 
 const user = {
-  name: 'Tom',
-  sayHi() {
-    console.log(`Hi, I'm ${this.name}!`);
+  firstName: 'John',
+  lastName: 'Doe',
+  getFullName() {
+    return this.firstName + ' ' + this.lastName;
+  },
+  setFullName(fullName) {
+    this.firstName = fullName.split(' ')[0];
+    this.lastName = fullName.split(' ')[1];
   },
 };
 
-// const deferredSum = defer(sum, 1000);
-// deferredSum(1, 4);
+const result = user.getFullName.bind(user);
+result();
+const result2 = user.setFullName('notJohn Doe');
+console.log(user);
 
-// const deferredHi = defer(user.sayHi.bind(user), 1000);
-// deferredHi();
+// export { user };
 
-const deferredHi = defer(user.sayHi, 1000);
-deferredHi.call({ name: 'Bob' });
+// const user = {
+//   fistName: 'John',
+//   lastName: 'Doe',
+//   getFullName() {
+//     return `${this.fistName} ${this.lastName}`;
+//     // console.log(`${this.fistName} ${this.lastName}`);
+//   },
+//   setFullName(FullName) {
+//     let [fist, last] = FullName.split(' ');
+//     this.fistName = fist;
+//     this.lastName = last;
+//   },
+// };
