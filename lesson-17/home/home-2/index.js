@@ -1,40 +1,59 @@
-// Переадресация вызова // Call forwarding
+// Функция bind
 
-// defer(func, ms) => function
+// call
+// apply
+// bind(func, context, [arg1],[arg2] ...)
 
-function defer(func, ms) {
-  return function () {
-    // setTimeout(func, ms);
-    // setTimeout(() => func.call(this, ...arguments), ms);
-    setTimeout(() => func.apply(this, arguments), ms);
+function bind(func, context, ...args) {
+  return function (...FnArgs) {
+    return func.call(context, ...args, ...FnArgs);
   };
 }
 
-export { defer };
+// export { bind }
 
-// const sayHi = () => {
-//   console.log('Hi');
+// option 2 ---------------------------------------------------------------
+// var bind = function (fn, context) {
+//   // обрезаем ненужные аргументы (функцию и контекст)
+//   var bindArgs = [].slice.call(arguments, 2);
+//   return function () {
+//     // здесь все аргументы будут необходимы
+//     var fnArgs = [].slice.call(arguments);
+//     // собираем все
+//     return fn.apply(context, bindArgs.concat(fnArgs));
+//   };
 // };
 
-// const deferredSayHi = defer(sayHi, 1000);
-// deferredSayHi();
+// option 3 ---------------------------------------------------------------
+// function bind(func, context, ...args) {
+//   return function () {
+//     const FnArgs = [].slice.call(arguments);
+//     console.log(`${args} + ${FnArgs} = ${args.concat([...arguments])}`);
+//     return func.apply(context, args.concat(FnArgs));
+//   };
+// }
 
-// const sum = (a, b) => {
-//   console.log(a + b);
+// testing ---------------------------------------------------------------
+
+// let user = {
+//   firstName: 'Вася',
 // };
 
-const user = {
-  name: 'Tom',
-  sayHi() {
-    console.log(`Hi, I'm ${this.name}!`);
-  },
-};
+// function func(phrase) {
+//   alert(phrase + ', ' + this.firstName);
+// }
 
-// const deferredSum = defer(sum, 1000);
-// deferredSum(1, 4);
+// // привязка this к user
+// let funcUser = func.bind(user);
 
-// const deferredHi = defer(user.sayHi.bind(user), 1000);
-// deferredHi();
+// funcUser('Привет'); // Привет, Вася (аргумент "Привет" передан, при этом this = user)
 
-const deferredHi = defer(user.sayHi, 1000);
-deferredHi.call({ name: 'Bob' });
+// ---------------------------------------------------------------
+// function printNameAndYear(year) {
+//   return `${this.name} - ${year}`;
+// }
+
+// const nameYear = bind(printNameAndYear, { name: 'John' }, 20);
+// nameYear();
+// const nameAnotherYear = bind(nameYear, { name: 'Jack' }, 50);
+// nameAnotherYear();
