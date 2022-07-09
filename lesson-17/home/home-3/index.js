@@ -1,40 +1,101 @@
-// Переадресация вызова // Call forwarding
+// Функция с закрепленным контекстом
+/* ===> 1 <=== */
+const student = {
+  name: 'Tom',
+};
 
-// defer(func, ms) => function
-
-function defer(func, ms) {
-  return function () {
-    // setTimeout(func, ms);
-    // setTimeout(() => func.call(this, ...arguments), ms);
-    setTimeout(() => func.apply(this, arguments), ms);
-  };
+function sayName() {
+  console.log(this.name);
 }
 
-export { defer };
+const sayStudentName = sayName.bind(student);
+sayStudentName();
 
-// const sayHi = () => {
-//   console.log('Hi');
-// };
+/*
+ * создайте ф-цию sayStudentName которая будет выводить в консоль имя студента 'Tom'
+ * используйте .bind и ф-цию sayName
+ */
 
-// const deferredSayHi = defer(sayHi, 1000);
-// deferredSayHi();
+const sayBruceName = sayName.bind({ name: 'Bruce' });
+sayBruceName();
 
-// const sum = (a, b) => {
-//   console.log(a + b);
-// };
+/*
+ * создайте ф-цию sayBruceName которая будет выводить в консоль имя 'Bruce'
+ * используйте ф-цию sayName и .bind с нужным объектом
+ */
 
-const user = {
-  name: 'Tom',
-  sayHi() {
-    console.log(`Hi, I'm ${this.name}!`);
+/* ===> 2 <=== */
+const company = {
+  companyName: 'Microsoft',
+};
+
+function greeting(firstName, lastName) {
+  console.log(`Hello, ${firstName} ${lastName}. Welcome to the ${this.companyName}`);
+}
+
+const specialGreeting = greeting.bind(company, 'Bob', 'Marley');
+specialGreeting();
+
+/*
+ * создайте ф-цию specialGreeting которая будет выводить в консоль
+ * 'Hello, Bob Marley. Welcome to the Microsoft`
+ * используйте ф-цию greeting и .bind с нужным объектом и аргументами
+ * specialGreeting не должна принимать ни одного аргумента
+ */
+
+/* ===> 3 <=== */
+const country = {
+  countryName: 'Ukraine',
+  capital: 'Kyiv',
+};
+
+function getPopulation(population) {
+  return `Population in ${this.countryName} is ${population}`;
+}
+
+const getUkrainePopulation = getPopulation.bind(country, 43000);
+console.log(getUkrainePopulation());
+
+/*
+ * создайте ф-цию getUkrainePopulation которая будет возвращать строку
+ * 'Population in Ukraine is 43000`
+ * 43000 передавайте в виде числа
+ * используйте ф-цию getPopulation и .bind с нужным объектом и аргументами
+ * getUkrainePopulation не должна принимать ни одного аргумента
+ */
+
+/* ===> 4 <=== */
+const transaction = {
+  amount: 1200,
+  operation: 'sell',
+  currency: 'USD',
+  exchange: 'NYSE',
+  printTransaction() {
+    console.log(`${this.amount} ${this.currency} - ${this.operation} on ${this.exchange}`);
   },
 };
 
-// const deferredSum = defer(sum, 1000);
-// deferredSum(1, 4);
+const anotherTransaction = {
+  amount: 400,
+  operation: 'buy',
+  currency: 'USD',
+  exchange: 'NASDAQ',
+};
 
-// const deferredHi = defer(user.sayHi.bind(user), 1000);
-// deferredHi();
+const printSpecialTransaction = transaction.printTransaction.bind(anotherTransaction);
+printSpecialTransaction();
 
-const deferredHi = defer(user.sayHi, 1000);
-deferredHi.call({ name: 'Bob' });
+/*
+ * создайте ф-цию printSpecialTransaction которая будет выводить в консоль
+ * '400 USD - buy on NASDAQ`
+ * используйте метод transaction.printTransaction и .bind с нужным объектом
+ * printSpecialTransaction не должна принимать ни одного аргумента
+ */
+
+// export {
+//   sayStudentName,
+//   sayBruceName,
+//   specialGreeting,
+//   getUkrainePopulation,
+//   printSpecialTransaction,
+// };
