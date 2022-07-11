@@ -1,69 +1,55 @@
-/* ===> 1 <=== */
-const student = {
-  name: 'Tom',
-};
+'use strict';
 
-function sayName() {
-  console.log(this.name);
+/**
+ * @param {function} func
+ * @return {function}
+ */
+
+// export { saveFuncCalls };
+
+function saveFuncCalls(func) {
+  withMemory.callsHistory = [];
+  function withMemory(...args) {
+    withMemory.callsHistory.push(args);
+    return func.apply(this, args);
+  }
+
+  return withMemory;
 }
 
-// вызовите ф-цию sayName так, чтобы в консоль вывелось имя студента
-sayName.apply(student);
-
-// вызовите ф-цию sayName так, чтобы в консоль вывелось имя 'Bruce' (используйте другой объект)
-sayName.apply({ name: 'Bruce' });
-
-/* ===> 2 <=== */
-const company = {
-  companyName: 'Microsoft',
-};
-
-function greeting(firstName, lastName) {
-  console.log(`Hello, ${firstName} ${lastName}. Welcome to the ${this.companyName}`);
+// example 1
+function sum(firstNum, secondNum) {
+  return firstNum + secondNum;
 }
 
-// вызовите ф-цию greeting так, чтобы в консоль вывелось
-// 'Hello, Bob Marley. Welcome to the Microsoft'
-// используйте объект company
-greeting.apply(company, ['Bob', 'Marley']);
+const sumWithMemory = saveFuncCalls(sum);
+sumWithMemory(4, 2); // ===> 6
+sumWithMemory(9, 1); // ===> 10
 
-/* ===> 3 <=== */
-const country = {
-  countryName: 'Ukraine',
-  capital: 'Kyiv',
-};
+sumWithMemory.callsHistory; // ===> [ [4, 2], [9, 1] ]
 
-function getPopulation(population) {
-  return `Population in ${this.countryName} is ${population}`;
+// example 2
+function addDelta(array, delta) {
+  return array.map(el => el + delta);
 }
 
-// вызовите ф-цию getPopulation так, чтобы она вернула
-// 'Population in Ukraine is 43000'
-// 43000 передавайте в виде числа
-// используйте объект country
-// результат работы ф-ции getPopulation присвойте в переменную и выведите в консоль
-const result = getPopulation.apply(country, [43000]);
+const addDeltaWithMemory = saveFuncCalls(addDelta);
+addDeltaWithMemory([111, 22, 55, 4], 8); // ===> [119, 30, 63, 12]
+addDeltaWithMemory([9, 1, -8, 15, 7, 0], 7); // ===> [16, 8, -1, 22, 14, 7]
 
-/* ===> 4 <=== */
-const transaction = {
-  amount: 1200,
-  operation: 'sell',
-  currency: 'USD',
-  exchange: 'NYSE',
-  printTransaction() {
-    console.log(`${this.amount} ${this.currency} - ${this.operation} on ${this.exchange}`);
+addDeltaWithMemory.callsHistory; // ===> [ [[111, 22, 55, 4], 8], [[9, 1, -8, 15, 7, 0], 7] ]
+
+// example 3
+const user = {
+  name: 'John',
+  sayHi() {
+    return this.name;
   },
 };
 
-const anotherTransaction = {
-  amount: 400,
-  operation: 'buy',
-  currency: 'USD',
-  exchange: 'NASDAQ',
-};
+const sayHiWithMemory = saveFuncCalls(user.sayHi);
+// sayHiWithMemory(); // ===> throw error // because sayHiWithMemory lost context
+const sayHiWithMemoryBinded = sayHiWithMemory.bind({ name: 'Tom' });
+console.log(sayHiWithMemoryBinded()); // ===> Tom // because we fixed context with bind and run functon again
 
-// вызовите метод transaction.printTransaction так, чтобы в консоль вывелось
-// '400 USD - buy on NASDAQ'
-// используйте объект anotherTransaction как контекст
-console.log(result);
-transaction.printTransaction.apply(anotherTransaction);
+console.log(sayHiWithMemory.callsHistory); // [ [] ]
