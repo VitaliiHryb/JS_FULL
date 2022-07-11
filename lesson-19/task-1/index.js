@@ -1,55 +1,60 @@
 'use strict';
 
-/**
- * @param {function} func
- * @return {function}
- */
+// Корабль - прототипы
 
-// export { saveFuncCalls };
+// export { vehicle, ship }
 
-function saveFuncCalls(func) {
-  withMemory.callsHistory = [];
-  function withMemory(...args) {
-    withMemory.callsHistory.push(args);
-    return func.apply(this, args);
-  }
-
-  return withMemory;
-}
-
-// example 1
-function sum(firstNum, secondNum) {
-  return firstNum + secondNum;
-}
-
-const sumWithMemory = saveFuncCalls(sum);
-sumWithMemory(4, 2); // ===> 6
-sumWithMemory(9, 1); // ===> 10
-
-sumWithMemory.callsHistory; // ===> [ [4, 2], [9, 1] ]
-
-// example 2
-function addDelta(array, delta) {
-  return array.map(el => el + delta);
-}
-
-const addDeltaWithMemory = saveFuncCalls(addDelta);
-addDeltaWithMemory([111, 22, 55, 4], 8); // ===> [119, 30, 63, 12]
-addDeltaWithMemory([9, 1, -8, 15, 7, 0], 7); // ===> [16, 8, -1, 22, 14, 7]
-
-addDeltaWithMemory.callsHistory; // ===> [ [[111, 22, 55, 4], 8], [[9, 1, -8, 15, 7, 0], 7] ]
-
-// example 3
-const user = {
-  name: 'John',
-  sayHi() {
-    return this.name;
+const vehicle = {
+  move() {
+    console.log(`${this.name} is moving`);
+  },
+  stop() {
+    console.log(`${this.name} stopped`);
   },
 };
 
-const sayHiWithMemory = saveFuncCalls(user.sayHi);
-// sayHiWithMemory(); // ===> throw error // because sayHiWithMemory lost context
-const sayHiWithMemoryBinded = sayHiWithMemory.bind({ name: 'Tom' });
-console.log(sayHiWithMemoryBinded()); // ===> Tom // because we fixed context with bind and run functon again
+const ship = {
+  name: 'Argo',
+  startMachine() {
+    console.log(`${this.name} lifting anchor up`);
+    this.move();
+  },
+  stopMachine() {
+    this.stop();
+    console.log(`${this.name} lifting anchor down`);
+  },
+};
 
-console.log(sayHiWithMemory.callsHistory); // [ [] ]
+Object.setPrototypeOf(ship, vehicle);
+
+// const vehicle = {
+//   move() {
+//     console.log(`${this.name} is moving`);
+//   },
+//   stop() {
+//     console.log(`${this.name} is stopped`);
+//   },
+// };
+
+// // vehicle.move();
+
+// // console.log(vehicle.toString);
+// // console.log(vehicle);
+
+// const ship = {
+//   name: 'Argo',
+//   hasWheels: false,
+//   startMachine() {
+//     console.log(`${this.name} lifting anchor up`);
+//   },
+//   stopMachine() {
+//     console.log(`${this.name} lifting anchor down`);
+//   },
+//   __proto__: vehicle,
+// };
+
+// ship.move();
+// ship.stop();
+// ship.startMachine();
+// ship.stopMachine();
+// // console.log(ship);
