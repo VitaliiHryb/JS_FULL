@@ -15,36 +15,36 @@ const getOwnProps = obj => {
 };
 
 // ---------------------------------------------------------
-const vehicle = {
-  move() {
-    console.log(`${this.name} is moving`);
-  },
-  stop() {
-    console.log(`${this.name} stopped`);
-  },
-};
+// const vehicle = {
+//   move() {
+//     console.log(`${this.name} is moving`);
+//   },
+//   stop() {
+//     console.log(`${this.name} stopped`);
+//   },
+// };
 
-const ship = {
-  name: 'Argo',
-  startMachine() {
-    console.log(`${this.name} lifting anchor up`);
-    this.move();
-  },
-  stopMachine() {
-    this.stop();
-    console.log(`${this.name} lifting anchor down`);
-  },
-};
+// const ship = {
+//   name: 'Argo',
+//   startMachine() {
+//     console.log(`${this.name} lifting anchor up`);
+//     this.move();
+//   },
+//   stopMachine() {
+//     this.stop();
+//     console.log(`${this.name} lifting anchor down`);
+//   },
+// };
 
-Object.setPrototypeOf(ship, vehicle);
+// Object.setPrototypeOf(ship, vehicle);
 
-// for (let prop in ship) {
-//   if (ship.hasOwnProperty(prop)) {
-//     console.log(prop);
-//   }
-// }
+// // for (let prop in ship) {
+// //   if (ship.hasOwnProperty(prop)) {
+// //     console.log(prop);
+// //   }
+// // }
 
-console.log(Object.keys(ship));
+// console.log(Object.keys(ship));
 
 // task-1 explanation
 // const user = {
