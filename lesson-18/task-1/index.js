@@ -1,69 +1,86 @@
-/* ===> 1 <=== */
-const student = {
-  name: 'Tom',
-};
+'use strict';
+// This в callback
+// event (this is arrow functions)
+// export { event };
 
-function sayName() {
-  console.log(this.name);
-}
-
-// вызовите ф-цию sayName так, чтобы в консоль вывелось имя студента
-sayName.apply(student);
-
-// вызовите ф-цию sayName так, чтобы в консоль вывелось имя 'Bruce' (используйте другой объект)
-sayName.apply({ name: 'Bruce' });
-
-/* ===> 2 <=== */
-const company = {
-  companyName: 'Microsoft',
-};
-
-function greeting(firstName, lastName) {
-  console.log(`Hello, ${firstName} ${lastName}. Welcome to the ${this.companyName}`);
-}
-
-// вызовите ф-цию greeting так, чтобы в консоль вывелось
-// 'Hello, Bob Marley. Welcome to the Microsoft'
-// используйте объект company
-greeting.apply(company, ['Bob', 'Marley']);
-
-/* ===> 3 <=== */
-const country = {
-  countryName: 'Ukraine',
-  capital: 'Kyiv',
-};
-
-function getPopulation(population) {
-  return `Population in ${this.countryName} is ${population}`;
-}
-
-// вызовите ф-цию getPopulation так, чтобы она вернула
-// 'Population in Ukraine is 43000'
-// 43000 передавайте в виде числа
-// используйте объект country
-// результат работы ф-ции getPopulation присвойте в переменную и выведите в консоль
-const result = getPopulation.apply(country, [43000]);
-
-/* ===> 4 <=== */
-const transaction = {
-  amount: 1200,
-  operation: 'sell',
-  currency: 'USD',
-  exchange: 'NYSE',
-  printTransaction() {
-    console.log(`${this.amount} ${this.currency} - ${this.operation} on ${this.exchange}`);
+const event = {
+  guests: [
+    { name: 'John', age: 18, email: 'example@server.com' },
+    { name: 'Tom', age: 16, email: 'exa@server.com' },
+    { name: 'Bob', age: 40, email: 'exa@server.com' },
+    { name: 'Ann', age: 21, email: 'exa@server.com' },
+  ],
+  message: 'Welcome to the party!',
+  getInvitations() {
+    return this.guests
+      .filter(({ age }) => age >= 18)
+      .map(({ name, email }) => ({
+        email: `${email}`,
+        message: `Dear ${name}! ${this.message}`,
+      }));
   },
 };
 
-const anotherTransaction = {
-  amount: 400,
-  operation: 'buy',
-  currency: 'USD',
-  exchange: 'NASDAQ',
-};
+console.log(event.getInvitations());
 
-// вызовите метод transaction.printTransaction так, чтобы в консоль вывелось
-// '400 USD - buy on NASDAQ'
-// используйте объект anotherTransaction как контекст
-console.log(result);
-transaction.printTransaction.apply(anotherTransaction);
+// const event = {
+//   message: 'Welcome to the party!',
+//   guests: [
+//     { name: 'Tom', age: 16, email: 'exa@server.com' },
+//     { name: 'Bob', age: 62, email: 'exa@server.com' },
+//     { name: 'Ann', age: 21, email: 'exa@server.com' },
+//     { name: 'John', age: 18, email: 'example@server.com' },
+//   ],
+//   getInvitations() {
+//     return this.guests
+//       .filter(i => i.age >= 18)
+//       .map(({ name, email }) => ({
+//         email: `${email}`,
+//         message: `Dear ${name}! ${this.message}`,
+//       }));
+//   },
+// };
+
+// -------------------------------------------------------------
+// const obj = {
+//   name: 'Tom',
+//   sayHi() {
+//     console.log(this.name);
+//   },
+// };
+
+// obj.sayHi();
+
+// console.log(this);
+
+// function func() {
+//   console.log(this);
+// }
+// func();
+
+// const func = obj.sayHi;
+// func();
+// Uncaught TypeError: Cannot read properties of undefined (reading 'name')
+
+// var a = 1;
+// window.a = 1;
+// console.log(window.a);
+
+// let b = 1;
+// console.log(window.b);
+
+// window.user = {
+//   name: 'John',
+// };
+// console.log(window.user);
+
+// const user = {
+//   name: 'Tom',
+//   sayHi() {
+//     console.log(this);
+//   },
+// };
+
+// user.sayHi();
+// setTimeout(user.sayHi.bind(user), 100);
+// setTimeout(() => user.sayHi(), 100);
