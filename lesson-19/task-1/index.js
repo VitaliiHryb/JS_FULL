@@ -45,9 +45,11 @@ Object.setPrototypeOf(ship, vehicle);
 //   name: 'Argo',
 //   hasWheels: false,
 //   startMachine() {
+//     this.move();
 //     console.log(`${this.name} lifting anchor up`);
 //   },
 //   stopMachine() {
+//     this.stop();
 //     console.log(`${this.name} lifting anchor down`);
 //   },
 //   __proto__: vehicle,
