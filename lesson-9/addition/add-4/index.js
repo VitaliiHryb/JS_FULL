@@ -2,7 +2,7 @@
 // output: array
 
 const getCustomersList = obj => {
-  Object.entries(obj)
+  return Object.entries(obj)
     .map(([id, customer]) => ({ id, ...customer }))
     .sort((a, b) => (a.age > b.age ? 1 : -1));
 };
