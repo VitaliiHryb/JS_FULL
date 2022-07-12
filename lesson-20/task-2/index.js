@@ -1,16 +1,75 @@
 'use strict';
+{
+    "max-classes-per-file": ["error", 1]
+}
+// ------------------------------- SHIP ----------------------------
 
-const user = {
-  firstName: 'John',
-  lastName: 'Doe',
-  get fullName() {
-    return `${this.firstName} ${this.lastName}`;
-  },
-  set fullName(value) {
-    const [firstName, lastName] = value.split(' ');
-    this.firstName = firstName;
-    this.lastName = lastName;
-  },
-};
+class Vehicle {
+  constructor(name, numberOfWheels) {
+    this.numberOfWheels = numberOfWheels;
+    this.name = name;
+  }
 
-export default user;
+  move() {
+    console.log(`${this.name} is moving`);
+  }
+  stop() {
+    console.log(`${this.name} stopped`);
+  }
+}
+
+class Ship extends Vehicle {
+  constructor(name, numberOfWheels, maxSpeed) {
+    super(name, numberOfWheels);
+    this.maxSpeed = maxSpeed;
+  }
+  move() {
+    console.log(`${this.name} lifting anchor up`);
+    super.move();
+  }
+
+  stop() {
+    super.stop();
+    console.log(`${this.name} lifting anchor down`);
+  }
+}
+
+const ship1 = new Ship('Aurora', '17 hm/h');
+
+ship1.move();
+console.log(ship1);
+ship1.stop();
+
+// const vehicle = {
+//   move() {
+//     console.log(`${this.name} is moving`);
+//   },
+//   stop() {
+//     console.log(`${this.name} stopped`);
+//   },
+// };
+
+// const ship = {
+// hasWheels: false,
+// name: 'Argo',
+
+// liftAnchorUp() {
+//   console.log(`${this.name} lifting anchor up`);
+// }
+
+// liftAnchorDown() {
+//   console.log(`${this.name} lifting anchor down`);
+// }
+
+// startMachine() {
+//   this.liftAnchorUp();
+//   this.move();
+// },
+// stopMachine() {
+//   this.stop();
+//   this.liftAnchorDown();
+// },
+// };
+
+// Object.setPrototypeOf(ship, vehicle);
+// ------------------------------- /SHIP ----------------------------
