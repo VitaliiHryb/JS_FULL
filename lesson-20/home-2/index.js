@@ -26,7 +26,7 @@ export class UserRepository {
   }
 
   get users() {
-    return this._users;
+    this._users;
   }
 
   getUserNames() {
