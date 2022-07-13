@@ -1,6 +1,5 @@
 'use strict';
 // export const tasks
-
 const tasks = [
   { text: 'Buy milk', done: false },
   { text: 'Pick up Tom from airport', done: false },
@@ -12,23 +11,23 @@ const tasks = [
 function renderTasks(taskList) {
   const listElement = document.querySelector('.list');
 
-  const listItems = taskList.map(({ text, done }) => {
-    const listItem = document.createElement('li');
-    listItem.classList.add('list__item');
-    if (done) {
-      listItem.classList.add('list__item_done');
-    }
+  const listItems = taskList
+    .sort((a, b) => a.done - b.done)
+    .map(({ text, done }) => {
+      const listItem = document.createElement('li');
+      listItem.classList.add('list__item');
+      if (done) {
+        listItem.classList.add('list__item_done');
+      }
 
-    const checkbox = document.createElement('input');
-    checkbox.classList.add('list__item-checkbox');
-    checkbox.setAttribute('type', 'checkbox');
-    checkbox.setAttribute('checked', done);
-    checkbox.checked = done;
+      const checkbox = document.createElement('input');
+      checkbox.setAttribute('type', 'checkbox');
+      checkbox.checked = done;
+      checkbox.classList.add('list__item-checkbox');
+      listItem.append(checkbox, text);
 
-    listItem.append(checkbox, text);
-
-    return listItem;
-  });
+      return listItem;
+    });
 
   listElement.append(...listItems);
 }
