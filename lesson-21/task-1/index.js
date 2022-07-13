@@ -1,74 +1,36 @@
-// 'use strict';
-{
-    "max-classes-per-file": ["error", 1]
-}
-/* eslint max-classes-per-file: ["error", { ignoreExpressions: true }] */
+'use strict';
+// export const tasks
 
+const tasks = [
+  { text: 'Buy milk', done: false },
+  { text: 'Pick up Tom from airport', done: false },
+  { text: 'Visit party', done: false },
+  { text: 'Visit doctor', done: true },
+  { text: 'Buy meat', done: true },
+];
 
-// ------------------------------ photo request was sent -----------------------------------
-// // static compare(user1, user2) {
-// //   return user1.age - user2.age;
-// // }
-// // const user1 = new User('Tom', 17);
-// // const user2 = new User('Tom', 37);
-// // console.log(User.compare(user1, user2));
+function renderTasks(taskList) {
+  const listElement = document.querySelector('.list');
 
-class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  sayHi() {
-    console.log(`Hi, I am ${this.name}`);
-  }
-
-  requestNewPhoto() {
-    console.log(`New photo request was sent for ${this.name}`);
-  }
-
-  setAge(value) {
-    if (value < 0) {
-      return false;
+  const listItems = taskList.map(({ text, done }) => {
+    const listItem = document.createElement('li');
+    listItem.classList.add('list__item');
+    if (done) {
+      listItem.classList.add('list__item_done');
     }
-    this.age = value;
-    if (value >= 25) {
-      this.requestNewPhoto();
-    }
-    return value;
-  }
 
-  static createEmpty() {
-    return new User('', null);
-  }
+    const checkbox = document.createElement('input');
+    checkbox.classList.add('list__item-checkbox');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('checked', done);
+    checkbox.checked = done;
+
+    listItem.append(checkbox, text);
+
+    return listItem;
+  });
+
+  listElement.append(...listItems);
 }
 
-// export { User };
-
-// const user1 = new User('Tom', 17);
-// console.log(user1);
-
-// // // конструктор в функции
-// // function User(name,age) {
-// //   this.name = name;
-// //   this.age = age,
-// // }
-
-// // User.prototype.sayHi = function() {
-// //   console.log(`Hi, I am ${this.name}`);
-// // }
-
-// // User.prototype.requestNewPhoto = function() {
-// //   console.log(`New photo request was sent for ${this.name}`);
-// // }
-
-// // User.prototype.setAge = function(value) {
-// //   if (value < 0) {
-// //     return false;
-// //   }
-// //   this.age = value;
-// //   if (value >= 25) {
-// //     this.requestNewPhoto();
-// //   }
-// //   return value;
-// // }
+renderTasks(tasks);
