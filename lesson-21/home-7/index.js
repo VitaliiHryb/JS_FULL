@@ -2,9 +2,9 @@
 // Создание DOM элементов и вставка на страницу
 
 function createButton(buttonText) {
-  const categories = document.querySelector('.categories');
+  const page = document.querySelector('body');
   const butt = document.createElement('button');
-  categories.append(butt);
+  page.append(butt);
   butt.textContent = buttonText;
   return butt;
 }
