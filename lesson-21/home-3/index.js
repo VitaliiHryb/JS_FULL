@@ -3,7 +3,7 @@
 
 function getTitle() {
   const textContent = document.querySelector('.title');
-  return textContent;
+  return textContent.textContent;
 }
 
 function getDescription() {
