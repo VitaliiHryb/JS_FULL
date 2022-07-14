@@ -5,9 +5,17 @@
 
 function setButton(buttonText) {
   const result = document.querySelector('body');
-  result.innerHTML = buttonText;
+  result.innerHTML = `<button>${buttonText}</button>`;
   return result;
 }
+
+// setButton('button text');
+
+// function setButton(buttonText) {
+//   const result = document.querySelector('body');
+//   result.innerHTML = buttonText;
+//   return result;
+// }
 
 // function setButton2(buttonText) {
 //   const result = document.querySelector('body');
