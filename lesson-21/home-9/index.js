@@ -5,6 +5,8 @@
 // finishForm must includes <type> with text on password for input with parol
 
 function finishForm() {
+  const formPas = document.querySelector('input');
+  formPas.type = 'password';
   const target = document.querySelector('form');
   const formItem = document.createElement('input');
   target.prepend(formItem);
