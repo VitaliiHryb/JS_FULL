@@ -9,7 +9,13 @@ function setButton(buttonText) {
   return result;
 }
 
+// function setButton2(buttonText) {
+//   const result = document.querySelector('body');
+//   result.textContent = buttonText;
+//   return result;
+// }
+
 // setButton('<button>button text</button>');
-// setButton(<button>button text</button>);
+// setButton2('<button>button text</button>');
 
 export { setButton };
