@@ -1,74 +1,32 @@
-// 'use strict';
-{
-    "max-classes-per-file": ["error", 1]
-}
-/* eslint max-classes-per-file: ["error", { ignoreExpressions: true }] */
+'use strict';
+// Working with classes for DOM elements
 
+// 1. добавить класс selected к елементу с классом one
+// 2. delete класс selected к елементу с классом two
+// 3. переключить (toggle) класс three_done у елемента с класом three
+// 4. add class 'another-class' for element with class 'four' if it has some-class
 
-// ------------------------------ photo request was sent -----------------------------------
-// // static compare(user1, user2) {
-// //   return user1.age - user2.age;
-// // }
-// // const user1 = new User('Tom', 17);
-// // const user2 = new User('Tom', 37);
-// // console.log(User.compare(user1, user2));
-
-class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  sayHi() {
-    console.log(`Hi, I am ${this.name}`);
-  }
-
-  requestNewPhoto() {
-    console.log(`New photo request was sent for ${this.name}`);
-  }
-
-  setAge(value) {
-    if (value < 0) {
-      return false;
-    }
-    this.age = value;
-    if (value >= 25) {
-      this.requestNewPhoto();
-    }
-    return value;
-  }
-
-  static createEmpty() {
-    return new User('', null);
+function manageClasses() {
+  document.querySelector('.one').classList.add('selected');
+  document.querySelector('.two').classList.remove('selected');
+  document.querySelector('.three').classList.toggle('three_done');
+  if (document.querySelector('.four').classList.contains('some-class')) {
+    document.querySelector('.four').classList.add('another-class');
   }
 }
 
-// export { User };
+// manageClasses();
 
-// const user1 = new User('Tom', 17);
-// console.log(user1);
+export { manageClasses };
 
-// // // конструктор в функции
-// // function User(name,age) {
-// //   this.name = name;
-// //   this.age = age,
-// // }
+// add type and name
+// inp2.type = 'text';
+// inp2.name = 'input_2';
 
-// // User.prototype.sayHi = function() {
-// //   console.log(`Hi, I am ${this.name}`);
-// // }
+//  const formPas = document.querySelector('input');
+//  const formItem = document.createElement('input');
+//  target.prepend(formItem);
 
-// // User.prototype.requestNewPhoto = function() {
-// //   console.log(`New photo request was sent for ${this.name}`);
-// // }
+// element.classList.add('class-name') - добавит элементу класс с именем class-name
 
-// // User.prototype.setAge = function(value) {
-// //   if (value < 0) {
-// //     return false;
-// //   }
-// //   this.age = value;
-// //   if (value >= 25) {
-// //     this.requestNewPhoto();
-// //   }
-// //   return value;
-// // }
+// element.classList.remove('class-name') - удалит у элемента класс с именем class-name
