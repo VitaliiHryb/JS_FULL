@@ -1,14 +1,14 @@
 'use strict';
-// Создание DOM элементов и вставка на страницу
+// Обработка события 'change'
+// use addEventListener
+// use event
 
-function createButton(buttonText) {
-  const page = document.querySelector('body');
-  const butt = document.createElement('button');
-  page.append(butt);
-  butt.textContent = buttonText;
-  return butt;
+const textInput = document.querySelector('.text-input');
+
+function handleClick(e) {
+  console.log(e.target.value);
 }
 
-// createButton('somebody will know it');
+textInput.addEventListener('change', handleClick);
 
-export { createButton };
+// singleUseButt.removeEventListener('click', handleClick);
