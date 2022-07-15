@@ -1,13 +1,14 @@
 'use strict';
-// Обработка события 'change'
+// Handle event for checkbox
 // use addEventListener
 
-const textInput = document.querySelector('.text-input');
+const taskStatus = document.querySelector('.task-status');
 function handleClick() {
-  // alert('done');
-  // alert(`${textInput.value}`);
-  console.log(`${textInput.value}`);
+  // alert(`${taskStatus.value}`);
+  if (taskStatus.checked) {
+    console.log(true);
+  } else console.log(false);
 }
-textInput.addEventListener('change', handleClick);
+taskStatus.addEventListener('change', handleClick);
 
 // export {}
