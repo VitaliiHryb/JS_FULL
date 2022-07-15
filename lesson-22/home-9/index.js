@@ -1,24 +1,16 @@
 'use strict';
-// Установка атрибутов для DOM элементов
+// Подписка для нескольких элементов
+// use addEventListener
+// use event
 
-// paste in input ==> name="login"
-// finishForm must includes <type> with text on password for input with parol
+const textInput = document.querySelectorAll('.pagination__page');
+// const dataPageNumb = document.querySelectorAll('.data-page-number');
 
-function finishForm() {
-  const formPas = document.querySelector('input');
-  formPas.type = 'password';
-  const target = document.querySelector('form');
-  const formItem = document.createElement('input');
-  target.prepend(formItem);
-  formItem.type = 'text';
-  formItem.name = 'login';
-  return formItem;
+function handleClick(e) {
+  console.log(e.target.textContent);
 }
 
-// finishForm();
+textInput.forEach(button => button.addEventListener('click', handleClick));
 
-export { finishForm };
-
-// add type and name
-// inp2.type = 'text';
-// inp2.name = 'input_2';
+// singleUseButt.removeEventListener('click', handleClick);
+// console.log(`${textInput.value}`);
