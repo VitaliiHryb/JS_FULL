@@ -1,20 +1,12 @@
-/* eslint-disable max-classes-per-file */
-// Finding multiple elements on a page
+'use strict';
+// Обработка события 'change'
+// use addEventListener
 
-export function getItemsList() {
-  const elementList = document.querySelectorAll('.technology');
-  console.dir(elementList);
-  return elementList;
+const textInput = document.querySelector('.text-input');
+function handleClick() {
+  // alert('done');
+  alert(`${textInput.value}`);
 }
+textInput.addEventListener('change', handleClick);
 
-// NodeList ==> Array.from
-
-export function getItemsArray() {
-  const elementArray = Array.from(document.querySelectorAll('.tool'));
-  // list ==> array
-  console.dir(elementArray);
-  return elementArray;
-}
-
-// getItemsList();
-// getItemsArray();
+// export {}
