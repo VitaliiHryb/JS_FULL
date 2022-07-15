@@ -1,17 +1,11 @@
 'use strict';
-// Finding an element on a page
+// Обработка события 'click'
+// use addEventListener
 
-export function getTitleElement() {
-  const titleElem = document.querySelector('.title');
-  console.dir(titleElem);
-  return titleElem;
+const createButt = document.querySelector('.create-btn');
+function handleClick() {
+  alert('done');
 }
+createButt.addEventListener('click', handleClick);
 
-export function getInputElement() {
-  const inputElem = document.querySelector('input');
-  console.dir(inputElem);
-  return inputElem;
-}
-
-// getTitleElement();
-// getInputElement();
+// export {}
