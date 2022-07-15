@@ -1,74 +1,22 @@
-// 'use strict';
-{
-    "max-classes-per-file": ["error", 1]
-}
-/* eslint max-classes-per-file: ["error", { ignoreExpressions: true }] */
+'use strict';
+// Нахождение ближайшего родителя
 
+// algo: find span by data-attribute and define its parents
+// 1. find span witch have data-number='num'
+// 2. return from data-section ==> selector with class '.box'
+// prompt: how to find needed selector: `span[data-number="${num}]"`
+// return data-section value
 
-// ------------------------------ photo request was sent -----------------------------------
-// // static compare(user1, user2) {
-// //   return user1.age - user2.age;
-// // }
-// // const user1 = new User('Tom', 17);
-// // const user2 = new User('Tom', 37);
-// // console.log(User.compare(user1, user2));
+// use .dataset
 
-class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  sayHi() {
-    console.log(`Hi, I am ${this.name}`);
-  }
-
-  requestNewPhoto() {
-    console.log(`New photo request was sent for ${this.name}`);
-  }
-
-  setAge(value) {
-    if (value < 0) {
-      return false;
-    }
-    this.age = value;
-    if (value >= 25) {
-      this.requestNewPhoto();
-    }
-    return value;
-  }
-
-  static createEmpty() {
-    return new User('', null);
-  }
+function getSection(num) {
+  const spanElem = document.querySelector(`span[data-number="${num}"]`);
+  const parrentElem = spanElem.closest('.box');
+  const spanValue = parrentElem.dataset.section;
+  return spanValue;
 }
 
-// export { User };
+// getSection(2);
+// getSection(6);
 
-// const user1 = new User('Tom', 17);
-// console.log(user1);
-
-// // // конструктор в функции
-// // function User(name,age) {
-// //   this.name = name;
-// //   this.age = age,
-// // }
-
-// // User.prototype.sayHi = function() {
-// //   console.log(`Hi, I am ${this.name}`);
-// // }
-
-// // User.prototype.requestNewPhoto = function() {
-// //   console.log(`New photo request was sent for ${this.name}`);
-// // }
-
-// // User.prototype.setAge = function(value) {
-// //   if (value < 0) {
-// //     return false;
-// //   }
-// //   this.age = value;
-// //   if (value >= 25) {
-// //     this.requestNewPhoto();
-// //   }
-// //   return value;
-// // }
+export { getSection };
