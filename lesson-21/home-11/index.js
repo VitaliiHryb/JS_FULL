@@ -1,74 +1,78 @@
-// 'use strict';
-{
-    "max-classes-per-file": ["error", 1]
-}
-/* eslint max-classes-per-file: ["error", { ignoreExpressions: true }] */
+'use strict';
+// Дата атрибуты (data-attributes)
 
+// 1. read a number from data-number
+// 2. ^2 this number and write in 'data-squared-number'
+// 3. add sqared number to next data-number
+// 4. find elements with class .number
 
-// ------------------------------ photo request was sent -----------------------------------
-// // static compare(user1, user2) {
-// //   return user1.age - user2.age;
-// // }
-// // const user1 = new User('Tom', 17);
-// // const user2 = new User('Tom', 37);
-// // console.log(User.compare(user1, user2));
+// use .dataset
 
-class User {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
+function squaredNumbers() {
+  const listElem = document.querySelectorAll('[data-number]');
 
-  sayHi() {
-    console.log(`Hi, I am ${this.name}`);
-  }
+  const callbackFunc = elem => {
+    const choosenNum = elem.dataset.number;
+    const squared = choosenNum * choosenNum;
+    elem.setAttribute('data-squared-number', squared);
+  };
 
-  requestNewPhoto() {
-    console.log(`New photo request was sent for ${this.name}`);
-  }
-
-  setAge(value) {
-    if (value < 0) {
-      return false;
-    }
-    this.age = value;
-    if (value >= 25) {
-      this.requestNewPhoto();
-    }
-    return value;
-  }
-
-  static createEmpty() {
-    return new User('', null);
+  for (let dataElem = 0; dataElem < listElem.length; dataElem += 1) {
+    callbackFunc(listElem[dataElem]);
   }
 }
 
-// export { User };
+// squaredNumbers();
 
-// const user1 = new User('Tom', 17);
-// console.log(user1);
+export { squaredNumbers };
 
-// // // конструктор в функции
-// // function User(name,age) {
-// //   this.name = name;
-// //   this.age = age,
-// // }
+// // first solution
+// function squaredNumbers() {
+//   const fiveElem = document.querySelector('[data-number="5"]');
+//   const sevenElem = document.querySelector('[data-number="7"]');
+//   const threeElem = document.querySelector('[data-number="-3"]');
 
-// // User.prototype.sayHi = function() {
-// //   console.log(`Hi, I am ${this.name}`);
-// // }
+//   const num1 = fiveElem.dataset.number;
+//   const squaredFive = num1 * num1;
+//   fiveElem.setAttribute('data-squared-number', squaredFive);
 
-// // User.prototype.requestNewPhoto = function() {
-// //   console.log(`New photo request was sent for ${this.name}`);
-// // }
+//   const num2 = sevenElem.dataset.number;
+//   const squaredSeven = num2 * num2;
+//   sevenElem.setAttribute('data-squared-number', squaredSeven);
 
-// // User.prototype.setAge = function(value) {
-// //   if (value < 0) {
-// //     return false;
-// //   }
-// //   this.age = value;
-// //   if (value >= 25) {
-// //     this.requestNewPhoto();
-// //   }
-// //   return value;
-// // }
+//   const num3 = fiveElem.dataset.number;
+//   const squaredThree = num3 * num3;
+//   threeElem.setAttribute('data-squared-number', squaredThree);
+//   }
+
+// // second solution
+// function squaredNumbers() {
+//   const fiveElem = document.querySelector('[data-number="5"]');
+//   const sevenElem = document.querySelector('[data-number="7"]');
+//   const threeElem = document.querySelector('[data-number="-3"]');
+
+//   const callbackFunc = elem => {
+//     const choosenNum = elem.dataset.number;
+//     const squared = choosenNum * choosenNum;
+//     elem.setAttribute('data-squared-number', squared);
+//   };
+
+//   callbackFunc(fiveElem);
+//   callbackFunc(sevenElem);
+//   callbackFunc(threeElem);
+
+//   console.log(fiveElem);
+//   console.log(sevenElem);
+//   console.log(threeElem);
+// }
+
+// // education material
+// // document.querySelectorAll('[data-genre~="horror"]');
+// // I want choose one li, so
+// // const fiveElem = document.querySelector('[data-number="5"]');
+// // setAttribute(name, value)
+
+// // article.dataset.columns = 5 приведёт к тому, что новое значение атрибута станет равным "5"
+
+// // dataset: DOMStringMap {number: '5'}
+// // dataset: DOMStringMap {number: '7'}
