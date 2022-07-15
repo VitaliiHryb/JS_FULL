@@ -1,14 +1,13 @@
 'use strict';
-// Update text content
+// Поле поиска
+// use addEventListener
 
-// const some result = document.querySelector('.title');
-
-function setTitle(text) {
-  const result = document.querySelector('.title');
-  result.textContent = text;
-  return result;
+const searchBtn = document.querySelector('.search__btn');
+const searchInput = document.querySelector('.search__input');
+function handleClick() {
+  // alert(`${taskStatus.value}`);
+  console.log(`${searchInput.value}`);
 }
+searchBtn.addEventListener('click', handleClick);
 
-// setTitle('I like to move it move it');
-
-export { setTitle };
+// export {}
