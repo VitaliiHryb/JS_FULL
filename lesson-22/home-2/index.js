@@ -7,7 +7,11 @@ function handleClick() {
   // alert(`${taskStatus.value}`);
   if (taskStatus.checked) {
     console.log(true);
-  } else console.log(false);
+    console.log(`${taskStatus.value}`);
+  } else {
+    console.log(false);
+    console.log(`${taskStatus.value}`);
+  }
 }
 taskStatus.addEventListener('change', handleClick);
 
