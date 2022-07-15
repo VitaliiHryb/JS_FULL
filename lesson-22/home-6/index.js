@@ -1,14 +1,19 @@
 'use strict';
-// Очистка элемента
+// Event target - считывание текста с кнопки
+// use addEventListener
+// use event
 
-// const some result = document.querySelector('.title');
+const singleUseButt = document.querySelectorAll('.btn');
 
-function clearList() {
-  const result = document.querySelector('.categories');
-  result.innerHTML = '';
-  return result;
+function handleClick(e) {
+  if (e.target) {
+    console.log(e.target.textContent);
+  }
 }
 
-// clearList();
+singleUseButt.forEach(button => button.addEventListener('click', handleClick));
 
-export { clearList };
+// singleUseButt.removeEventListener('click', handleClick);
+// if (event.type === 'fullscreenchange')
+
+// export {}
