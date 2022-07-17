@@ -1,99 +1,107 @@
-// Всплытие и погружение событий
-const divElem = document.querySelector('.rect_div');
-const pElem = document.querySelector('.rect_p');
-const sapnElem = document.querySelector('.rect_span');
-const eventsListElem = document.querySelector('.events-list');
-const btnClear = document.querySelector('.clear-btn');
-const btnRemoveHandlers = document.querySelector('.remove-handlers-btn');
-const btnAttatchHandlers = document.querySelector('.attach-handlers-btn');
+// Работа с формой из JavaScript
 
-const logTarget = (text, color) => {
-  eventsListElem.innerHTML += `<span style="color: ${color}; margin-left: 8px">${text}</span>`;
+const emailInputElem = document.querySelector('#email');
+const passwordInputElem = document.querySelector('#password');
+
+const emailErrorElem = document.querySelector('.error-text_email');
+const passwordErrorElem = document.querySelector('.error-text_password');
+
+const isRequired = value => (value ? undefined : 'Required');
+
+const isEmail = value => (value.includes('@') ? undefined : 'Should be an email');
+
+const validatorsByField = {
+  email: [isRequired, isEmail],
+  password: [isRequired],
 };
 
-const logGreenDiv = logTarget.bind(null, 'div', 'green');
-const logGreenP = logTarget.bind(null, 'p', 'green');
-const logGreenSpan = logTarget.bind(null, 'span', 'green');
-
-const logGreyDiv = logTarget.bind(null, 'div', 'grey');
-const logGreyP = logTarget.bind(null, 'p', 'grey');
-const logGreySpan = logTarget.bind(null, 'span', 'grey');
-
-const addHandlers = () => {
-  divElem.addEventListener('click', logGreyDiv, true);
-  divElem.addEventListener('click', logGreenDiv);
-
-  pElem.addEventListener('click', logGreyP, true);
-  pElem.addEventListener('click', logGreenP);
-
-  sapnElem.addEventListener('click', logGreySpan, true);
-  sapnElem.addEventListener('click', logGreenSpan);
+const validate = (fieldName, value) => {
+  const validators = validatorsByField[fieldName];
+  return validators
+    .map(validator => validator(value))
+    .filter(errorText => errorText)
+    .join(', ');
 };
 
-addHandlers();
-
-btnAttatchHandlers.addEventListener('click', addHandlers);
-
-const removeHandlers = () => {
-  divElem.removeEventListener('click', logGreyDiv, true);
-  divElem.removeEventListener('click', logGreenDiv);
-
-  pElem.removeEventListener('click', logGreyP, true);
-  pElem.removeEventListener('click', logGreenP);
-
-  sapnElem.removeEventListener('click', logGreySpan, true);
-  sapnElem.removeEventListener('click', logGreenSpan);
+const onEmailChange = event => {
+  const errorText = validate('email', event.target.value);
+  emailErrorElem.textContent = errorText;
 };
 
-btnRemoveHandlers.addEventListener('click', removeHandlers);
-
-const clear = element => {
-  element.innerHTML = '';
+const onPasswordChange = event => {
+  const errorText = validate('password', event.target.value);
+  passwordErrorElem.textContent = errorText;
 };
 
-const clearBox = clear.bind(null, eventsListElem);
-btnClear.addEventListener('click', clearBox);
+emailInputElem.addEventListener('input', onEmailChange);
+passwordInputElem.addEventListener('input', onPasswordChange);
 
-// const divElem = document.querySelector('.rect_div');
-// const pElem = document.querySelector('.rect_p');
-// const spanElem = document.querySelector('.rect_span');
+const formElem = document.querySelector('.login-form');
 
-// const logTarget = (text, color) => {
-//   const eventsListElem = document.querySelector('.events-list');
+const onFormSubmit = event => {
+  event.preventDefault();
+  const formData = [...new FormData(formElem)].reduce(
+    (acc, [field, value]) => ({ ...acc, [field]: value }),
+    {},
+  );
 
-//   eventsListElem.innerHTML += `<span style="color: ${color}; margin-left: 8px;">${text}</span>`;
+  alert(JSON.stringify(formData));
+};
+
+formElem.addEventListener('submit', onFormSubmit);
+
+// ---------------------------------------------------------------------------------------------
+
+// const emailInputElem = document.querySelector('#email');
+// const passwordInputElem = document.querySelector('#password');
+
+// const emailErrorElem = document.querySelector('error-text_email');
+// const passwordErrorElem = document.querySelector('error-text_password');
+
+// // this is validator
+// const isRequired = value => (value ? undefined : 'Required');
+
+// const isEmail = value => (value.includes('@') ? undefined : 'Shoud be an email');
+
+// const validatorsByField = {
+//   email: [isRequired, isEmail],
+//   password: [isRequired],
 // };
 
-// // const logGreenDiv = () => logTarget.bind(null, 'DIV', 'green');
-// const logGreenDiv = () => logTarget('DIV', 'green');
-// const logGreenP = () => logTarget('P', 'green');
-// const logGreenSpan = () => logTarget('SPAN', 'green');
+// const validate = (fileName, value) => {
+//   const validators = validatorsByField[fileName];
+//   return validators
+//     .map(validator => validator(value))
+//     .filter(errorText => errorText)
+//     .join(', ');
+// };
 
-// const logGreyDiv = () => logTarget('DIV', 'grey');
-// const logGreyP = () => logTarget('P', 'grey');
-// const logGreySpan = () => logTarget('SPAN', 'grey');
+// const onEmailChange = event => {
+//   const errorText = validate('email', event.target.value);
+//   emailErrorElem.textContent = errorText;
+// };
 
-// divElem.addEventListener('click', logGreyDiv, true);
-// divElem.addEventListener('click', logGreenDiv);
+// const onPasswordChange = event => {
+//   const errorText = validate('password', event.target.value);
+//   passwordErrorElem.textContent = errorText;
+// };
 
-// pElem.addEventListener('click', logGreyP, { capture: true });
-// pElem.addEventListener('click', logGreenP);
+// emailInputElem.addEventListener('input', onEmailChange);
+// passwordInputElem.addEventListener('input', onPasswordChange);
 
-// spanElem.addEventListener('click', logGreySpan, true);
-// spanElem.addEventListener('click', logGreenSpan);
+// const formElem = document.querySelector('login-form');
 
-// // divElem.addEventListener('click', event => {
-// //   logGreenP();
-// //   // event.stopPropagation();
-// //   console.log(event.currentTarget);
-// // });
+// const onFormSubmit = event => {
+//   event.preventDefault();
+//   const formData = [...new FormData(formElem)].reduce(
+//     (acc, [field, value]) => ({
+//       ...acc,
+//       [field]: value,
+//     }),
+//     {},
+//   );
 
-// // const handler = () => {
-// //   console.log('div');
-// // };
+//   alert(JSON.stringify(formData));
+// };
 
-// // elem.addEventListener('click', handler());
-// // elem.removeEventListener('click', handler());
-
-// // for user
-// // .textContent
+// formElem.addEventListener('submit', onFormSubmit);
