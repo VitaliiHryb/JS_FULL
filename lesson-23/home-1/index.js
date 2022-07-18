@@ -87,6 +87,7 @@ function createNewTask() {
   if (!textInInput) {
     return;
   }
+  taskInput.value = '';
   const newId = Math.max(...tasks.map(t => +t.id)) + 1;
 
   const addedTask = { text: textInInput, done: false, id: newId.toString() };
