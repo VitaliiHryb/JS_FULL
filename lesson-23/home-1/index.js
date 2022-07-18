@@ -84,6 +84,9 @@ function removeListeners() {
 
 function createNewTask() {
   const textInInput = taskInput.value;
+  if (!textInInput) {
+    return;
+  }
   const newId = Math.max(...tasks.map(t => +t.id)) + 1;
 
   const addedTask = { text: textInInput, done: false, id: newId.toString() };
