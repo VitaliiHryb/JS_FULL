@@ -15,9 +15,12 @@
 // 4. keep in mind that data-attribute will have data - 'string'
 
 // Algo:
-// 1. create action for button ( ==> creating tasks )
-// 1a. onclick use renderTask
-// use getInput
+// 1. create id for tasks
+// 2. render List
+// 3. change task state after event
+// 4. write function createNewTask
+// 4a. need generate id for a new task
+// 5. removeListeners for clearing memory after renderTasks init
 
 const tasks = [
   { id: '1', text: 'Buy milk', done: false },
@@ -57,10 +60,6 @@ const renderTasks = tasksList => {
         listItemElem.classList.add('list__item_done');
       }
       listItemElem.append(checkbox, text);
-      // <li class="list__item list__item_done">
-      //   <input type="checkbox" class="list__item-checkbox">
-      //   Visit
-      // </li>
 
       return listItemElem;
     });
