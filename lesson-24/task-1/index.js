@@ -17,13 +17,13 @@ const dayOfWeek = (date, days) => {
 
 export { dayOfWeek };
 
-// // not works (why???)
-// const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su'];
+// dont knwo why not works if use today instad of dateInFuture (in console works)
+// const weekDay = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'St'];
+// const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su']; view in task
 
 // const dayOfWeek = (date, days) => {
 //   const day = new Date(date).getDate();
 //   const today = new Date(date).setDate(day + days);
-
 //   return weekDays[new Date(today).getDate()];
 // };
 
