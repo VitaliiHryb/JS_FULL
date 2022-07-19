@@ -7,7 +7,8 @@
 // 2. taken date set new date with method .setDate()
 // 3. find out what day of the week is our data with method .getDay()
 
-const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su'];
+// const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su'];
+const weekDays = ['Su', 'St', 'Fr', 'Th', 'We', 'Tu', 'Mo'];
 
 const dayOfWeek = (date, days) => {
   const day = new Date(date).getDate();
