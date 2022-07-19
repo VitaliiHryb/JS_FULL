@@ -19,9 +19,11 @@ const dayOfWeek = (date, days) => {
 
 export { dayOfWeek };
 
-const showDate = dayOfWeek(new Date(2022, 2, 24), 13);
+// const showDate = dayOfWeek(new Date(2022, 2, 24), 13);
 
-console.log(showDate); // ==> 'Su'
+// console.log(showDate); // ==> 'Su'
+
+// --------------------------------------------------------
 
 // const weekDays1 = ['Su', 'St', 'Fr', 'Th', 'We', 'Tu', 'Mo'];
 
