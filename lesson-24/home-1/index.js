@@ -1,77 +1,46 @@
-// Compare 2 properties
-// input: two obj, obj
-// output: boolian
+// Разница дат
+// input:
+// output:
 
 // algo
-// 1. get keys1, keys2
-// 2. if keys1.legth !== keys2.length
-// 3. iterate keys1
-// 4. compare keys1/keys2 & values1/values2
-// 5. if (step 4 === false) ==> false
+// 1. millsec to minutes
+// 2. millsec to hour
+// 3. millsec to day
+// 4. use Math.abs.()
+// 5. get diff in milliseconds
+// 6. ==> 275d 2h 58m 16s
+// 6a. first get days from diff, after this hours and seconds
 
-const getCustomersList = obj => {
-  // put your code here
+const millToMin = 60 * 1000;
+const millToHours = 60 * millToMin;
+const millToDay = 24 * millToHours;
+
+const getDiff = (startDate, endDate) => {
+  // console.log(endDate);
+  // console.log(startDate);
+  // console.log(endDate - startDate);
+  // console.log(Math.abs(endDate - startDate));
+
+  const millDiff = Math.abs(endDate - startDate);
+  //
+  const daysDiff = Math.trunc(millDiff / millToDay);
+  const noDaysDiff = millDiff - daysDiff * millToDay;
+  //
+  const hoursDiff = Math.trunc(noDaysDiff / millToHours);
+  const nohoursDiff = noDaysDiff - hoursDiff * millToHours;
+  //
+  const minDiff = Math.trunc(nohoursDiff / millToMin);
+  const noMinDiff = nohoursDiff - minDiff * millToMin;
+
+  const secDiff = Math.trunc(noMinDiff / 1000);
+
+  // console.log(`${daysDiff}d ${hoursDiff}h ${minDiff}m ${secDiff}s`);
+  return `${daysDiff}d ${hoursDiff}h ${minDiff}m ${secDiff}s`;
 };
 
-// my solution
-function compareObjects(obj1, obj2) {
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-  const values1 = Object.values(obj1);
-  const values2 = Object.values(obj2);
-  if (keys1.length !== keys2.length) {
-    return false;
-  }
-  for (let key of keys1) {
-    if (!keys2.includes(key)) {
-      return false;
-    }
-  }
-  for (let value of values1) {
-    if (!values2.includes(value)) {
-      return false;
-    }
-  }
-  return true;
-}
+// // test data
+// const startDate = new Date(2017, 3, 22, 5, 23, 50);
+// const endDate = new Date(2018, 3, 15, 6, 5, 44);
+// getDiff(startDate, endDate);
 
-// old solution
-// function compareObjects(obj1, obj2) {
-//   const keys1 = Object.keys(obj1);
-//   const keys2 = Object.keys(obj2);
-//   if (keys1.length !== keys2.length) {
-//     return false;
-//   }
-//   for (let key of keys1) {
-//     if (obj1[key] !== obj2[key]) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
-
-// examples
-const obj1 = {
-  name: 'Tom',
-  age: 17,
-};
-
-const obj2 = {
-  name: 'Bob',
-  age: 17,
-};
-
-const obj3 = {
-  name: 'Bob',
-  age: 17,
-  student: false,
-};
-
-const obj4 = {
-  name: 'Tom',
-  age: 17,
-};
-
-console.log(compareObjects(obj1, obj2)); // ==> false
-console.log(compareObjects(obj2, obj3)); // ==> false
-console.log(compareObjects(obj1, obj4)); // ==> true
+export { getDiff };
