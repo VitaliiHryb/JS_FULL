@@ -55,7 +55,7 @@ const renderTasks = tasksList => {
       checkbox.checked = done;
       checkbox.classList.add('list__item-checkbox');
 
-      checkbox.addEventListener('change', changeTaskState);
+      checkbox.addEventListener('click', changeTaskState);
       if (done) {
         listItemElem.classList.add('list__item_done');
       }
@@ -78,7 +78,7 @@ function changeTaskState(event) {
 
 function removeListeners() {
   const checkboxes = document.querySelectorAll('.list__item-checkbox');
-  checkboxes.forEach(c => c.removeEventListener('change', changeTaskState));
+  checkboxes.forEach(c => c.removeEventListener('click', changeTaskState));
 }
 
 function createNewTask() {
