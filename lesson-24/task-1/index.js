@@ -32,3 +32,5 @@ console.log(showDate); // ==> 'Su'
 // const result = getDayOfWeek(new Date(2019, 0, 1), 14);
 
 // console.log(result);
+
+export { dayOfWeek };
