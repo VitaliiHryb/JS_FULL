@@ -7,17 +7,27 @@
 // 2. taken date set new date with method .setDate()
 // 3. find out what day of the week is our data with method .getDay()
 
-// const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su'];
-const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su'];
+const weekDay = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'St'];
 
 const dayOfWeek = (date, days) => {
   const day = new Date(date).getDate();
-  const today = new Date(date).setDate(day + days);
-
-  return weekDays[new Date(today).getDate()];
+  const dateInFuture = new Date(date).setDate(day + days);
+  return weekDay[new Date(dateInFuture).getDay()];
 };
 
 export { dayOfWeek };
+
+// // not works (why???)
+// const weekDays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Su'];
+
+// const dayOfWeek = (date, days) => {
+//   const day = new Date(date).getDate();
+//   const today = new Date(date).setDate(day + days);
+
+//   return weekDays[new Date(today).getDate()];
+// };
+
+// export { dayOfWeek };
 
 // const showDate = dayOfWeek(new Date(2022, 2, 24), 13);
 
