@@ -17,6 +17,8 @@ const dayOfWeek = (date, days) => {
   return weekDays[new Date(today).getDate()];
 };
 
+export { dayOfWeek };
+
 const showDate = dayOfWeek(new Date(2022, 2, 24), 13);
 
 console.log(showDate); // ==> 'Su'
@@ -33,5 +35,3 @@ console.log(showDate); // ==> 'Su'
 // const result = getDayOfWeek(new Date(2019, 0, 1), 14);
 
 // console.log(result);
-
-export { dayOfWeek };
