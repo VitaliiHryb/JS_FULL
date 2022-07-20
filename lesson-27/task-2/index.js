@@ -1,39 +1,74 @@
-/*
- * ф-ция getSenseOfLife не должна принимать аргументы
- * ф-ция getSenseOfLife должна вернуть число 42
- */
+// Событие storage
 
-// ... code here
+const counter = document.querySelector('.counter');
+const counterValueElement = document.querySelector('.counter__value');
 
-/* ф-ция getSquared должна принимать число и вернуть квадрат этого числа */
+window.addEventListener('storage', event => {
+  counterValueElement.textContent = event.newValue;
+});
 
-// ... code here
+function counterChange(event) {
+  const button = event.target.classList.contains('counter__button');
+  if (!button) return;
+  const value = +counterValueElement.textContent;
+  const data = event.target.dataset.action;
+  const newValue = data === 'increase' ? value + 1 : value - 1;
+  localStorage.setItem('count', newValue);
+  counterValueElement.textContent = newValue;
+}
 
-/* ф-ция sum должна принимать два числа и вернуть их сумму */
+counter.addEventListener('click', counterChange);
 
-// ... code here
+// // example
 
-/*
- * ф-ция sum должна принимать число
- * ф-ция sum должна вывести в консоль строку 'I am 34 years old'
- * где 34 - число, полученное в аргументах
- */
+// const user = {
+//   name: 'Tom',
+//   age: 25,
+//   isStudent: false,
+//   driverLicense: null,
+//   hobbies: ['football', 'diving'],
+//   education: [
+//     {
+//       name: 'MIT Precourse',
+//       gradueteDate: '2020-05-04T14:48:46.105Z',
+//     },
+//   ],
+// };
 
-// ... code here
+// -----------------------------------------------------
+// // not works
+// const counterElem = document.querySelector('.counter');
+// const counterValueElem = document.querySelector('.counter__value');
 
-/* ======> Arrow functions <======= */
+// const onCounterChange = e => {
+//   const isButton = e.target.classList.contains('.counter__button');
 
-/* ф-ция mult должна принимать два числа и вернуть их произведение */
+//   if (!isButton) {
+//     return;
+//   }
 
-// ... code here
+//   const oldValue = Number(counterValueElem.textContent);
 
-/* ф-ция square должна принимать число и вернуть его, возведенное в квадрат */
+//   const action = e.target.dataset.action;
 
-// ... code here
+//   const newValue = action === 'decrease' ? oldValue - 1 : oldValue + 1;
 
-/*
- * ф-ция getMagicNumber не должна принимать аргументы
- * ф-ция getMagicNumber должна вернуть число 17
- */
+//   localStorage.setItem('counterValue', newValue);
 
-// ... code here
+//   counterValueElem.textContent = newValue;
+// };
+
+// counterElem.addEventListener('click', onCounterChange);
+
+// const onStoraageChange = e => {
+//   console.log(e);
+//   counterValueElem.textContent = e.newValue;
+// };
+
+// window.addEventListener('storage', onStoraageChange);
+
+// const onDocumentLoaded = () => {
+//   counterValueElem.textContent = localStorage.getItem('counterValue') || 0;
+// };
+
+// document.addEventListener('DOMContentLoaded', onDocumentLoaded);
