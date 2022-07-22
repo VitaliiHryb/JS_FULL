@@ -1,74 +1,28 @@
-// Получение всех данных localStorage
+// Композиция
+// compose
 
-const getLocalStorageData = () => {
-  return Object.entries(localStorage).reduce((acc, [key, value]) => {
-    let newValue;
-    try {
-      newValue = JSON.parse(value);
-    } catch (e) {
-      newValue = value;
-    }
-    return {
-      ...acc,
-      [key]: newValue,
-    };
-  }, {});
-};
+// explanation
+// f ==> function
+// g ==> function
+// f(g(value)) === f*g(value)
 
-export { getLocalStorageData };
+// explanation
+// const compose = (func1, func2, ...res) => {
+//   // call functions in arguments
+// }
 
-// localStorage.clear();
-// // localStorage.setItem('hobbies', [1, 2, 3, 4]);
-// localStorage.setItem('hobbies', JSON.stringify({ name: 'Tom' }));
-// // localStorage.setItem('name', JSON.stringify('Tom'));
-// localStorage.setItem('name', 'Tom');
-// localStorage.setItem('age', JSON.stringify(17));
+const add3 = value => value + 3;
+const mult2 = value => value * 2;
+const div4 = value => value / 4;
 
-// // console.log(JSON.parse(localStorage.getItem('hobbies')));
+const compose =
+  (...funcs) =>
+  value => {
+    return funcs.reduce((acc, func) => func(acc), value);
+  };
 
-// const getLocalStorageData = () => {
-//   // option 1
-//   // for (let i = 0; i < localStorage.length; i += 1) {
-//   //   localStorage.key(i);
-//   // }
-//   // option 2
-//   // for (let i of localStorage) {
-//   //   localStorage.key(i);
-//   // }
-//   // option 3
-//   // Object.keys(localStorage);
-//   // Object.values(localStorage);
-//   return Object.entries(localStorage).reduce((acc, [key, value]) => {
-//     let newValue;
-//     try {
-//       newValue = JSON.parse(value);
-//     } catch (e) {
-//       newValue = value;
-//     }
-//     return {
-//       ...acc,
-//       // [key]: JSON.parse(value),
-//       [key]: newValue,
-//     };
-//   }, {});
-// };
+const doEveryting = compose(add3, mult2, div4);
 
-// console.log(getLocalStorageData());
+console.log(doEveryting(3));
 
-// localStorage.getItem('name');
-
-// example
-
-// const user = {
-//   name: 'Tom',
-//   age: 25,
-//   isStudent: false,
-//   driverLicense: null,
-//   hobbies: ['football', 'diving'],
-//   education: [
-//     {
-//       name: 'MIT Precourse',
-//       gradueteDate: '2020-05-04T14:48:46.105Z',
-//     },
-//   ],
-// };
+export { compose };
