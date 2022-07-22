@@ -19,4 +19,4 @@ const triple = mult(3 / 2);
 // const result = triple(twice(9));
 // console.log(result);
 
-export { mult };
+export { mult, twice, triple };
