@@ -1,38 +1,38 @@
-// Функция calc
+// Load image
+const addImage = (imgSrc, callback) => {
+  const imgElem = document.createElement('img');
+  imgElem.setAttribute('alt', 'My Photo');
+  imgElem.src = imgSrc;
+  const containerElem = document.querySelector('.page');
+  containerElem.append(imgElem);
 
-// calc(3).add(2).mult(4).div(10).subtract(5).result() // -3
-
-const calc = initValue => {
-  let result = initValue;
-
-  const calculator = {
-    add(value) {
-      result += value;
-      // return this; // it is the same as return calcalator
-      return calculator;
-    },
-    mult(value) {
-      result *= value;
-      return this;
-    },
-    div(value) {
-      result /= value;
-      return this;
-    },
-    subtract(value) {
-      result -= value;
-      return this;
-    },
-    result() {
-      return result;
-    },
+  const onImageLoaded = () => {
+    const { width, height } = imgElem;
+    callback(null, { width, height });
   };
 
-  return calculator;
+  imgElem.addEventListener('load', onImageLoaded);
+
+  imgElem.addEventListener('error', () => callback('Image load fail'));
 };
 
-export { calc };
+const imgSrc =
+  'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
 
-const result = calc(3).add(2).mult(4).div(10).subtract(5).result();
+const onImageLoaded = (error, data) => {
+  if (error) {
+    console.log(error);
+    return;
+  }
+  const { width, height } = data;
+  const sizeElem = document.querySelector('.image-size');
+  sizeElem.textContent = `${width} x ${height}`;
+};
 
-console.log(result); // ==> -3
+addImage(imgSrc, onImageLoaded);
+
+// examples
+// addImage(
+//   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg',
+//   onImageLoaded,
+// );
