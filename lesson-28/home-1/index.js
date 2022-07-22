@@ -1,74 +1,53 @@
-// Получение всех данных localStorage
+// Функция shmoment
+// input: Date
+// output: updated Data
 
-const getLocalStorageData = () => {
-  return Object.entries(localStorage).reduce((acc, [key, value]) => {
-    let newValue;
-    try {
-      newValue = JSON.parse(value);
-    } catch (e) {
-      newValue = value;
-    }
-    return {
-      ...acc,
-      [key]: newValue,
-    };
-  }, {});
-};
+// use chaining
 
-export { getLocalStorageData };
+// use getFullYears() ...
+// const years = result.setFullYears();
+// const month = result.setMonth();
+// const days = result.setDate();
+// const hours = result.setHours();
+// const minutes = result.setMinutes();
+// const seconds = result.setSeconds();
+// const millise = result.setMilliseconds();
 
-// localStorage.clear();
-// // localStorage.setItem('hobbies', [1, 2, 3, 4]);
-// localStorage.setItem('hobbies', JSON.stringify({ name: 'Tom' }));
-// // localStorage.setItem('name', JSON.stringify('Tom'));
-// localStorage.setItem('name', 'Tom');
-// localStorage.setItem('age', JSON.stringify(17));
+function shmoment(date) {
+  const result = new Date(date);
 
-// // console.log(JSON.parse(localStorage.getItem('hobbies')));
+  const dataQuantum = {
+    years: value => result.setFullYear(result.getFullYear() + value),
+    months: value => result.setMonth(result.getMonth() + value),
+    days: value => result.setDate(result.getDate() + value),
+    minutes: value => result.setMinutes(result.getMinutes() + value),
+    hours: value => result.setHours(result.getHours() + value),
+    seconds: value => result.setSeconds(result.getSeconds() + value),
+    milliseconds: value => result.setMilliseconds(result.getMilliseconds() + value),
+  };
 
-// const getLocalStorageData = () => {
-//   // option 1
-//   // for (let i = 0; i < localStorage.length; i += 1) {
-//   //   localStorage.key(i);
-//   // }
-//   // option 2
-//   // for (let i of localStorage) {
-//   //   localStorage.key(i);
-//   // }
-//   // option 3
-//   // Object.keys(localStorage);
-//   // Object.values(localStorage);
-//   return Object.entries(localStorage).reduce((acc, [key, value]) => {
-//     let newValue;
-//     try {
-//       newValue = JSON.parse(value);
-//     } catch (e) {
-//       newValue = value;
-//     }
-//     return {
-//       ...acc,
-//       // [key]: JSON.parse(value),
-//       [key]: newValue,
-//     };
-//   }, {});
-// };
+  const update = {
+    add(timeQuant, value) {
+      dataQuantum[timeQuant](value);
+      return this;
+    },
+    subtract(timeQuant, value) {
+      dataQuantum[timeQuant](-value);
+      return this;
+    },
+    result() {
+      return new Date(result);
+    },
+  };
 
-// console.log(getLocalStorageData());
+  return update;
+}
 
-// localStorage.getItem('name');
+export { shmoment };
 
-// example
-
-// const user = {
-//   name: 'Tom',
-//   age: 25,
-//   isStudent: false,
-//   driverLicense: null,
-//   hobbies: ['football', 'diving'],
-//   education: [
-//     {
-//       name: 'MIT Precourse',
-//       gradueteDate: '2020-05-04T14:48:46.105Z',
-//     },
-//   ],
-// };
+const res = shmoment(new Date(2020, 0, 7, 17, 17, 17))
+  .add('minutes', 2)
+  .add('days', 8)
+  .subtract('years', 1)
+  .result(); // ... Jan 15 2019 17:19:17 ...
+console.log(res);
