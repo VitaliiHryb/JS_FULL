@@ -1,46 +1,48 @@
-// рекурсия
-// Проход по дереву с помощью рекурсии
+// Write with interval
+'use strict';
 
-const favorites = ['id-6', 'id-17'];
-
-const tree = {
-  id: 'id-1',
-  name: 'Products',
-  // isFavorite: true, // add this
-  nodes: [
-    {
-      id: 'id-2',
-      name: 'Food',
-      nodes: [
-        {
-          id: 'id-6',
-          name: 'Drinks',
-          nodes: [],
-        },
-      ],
-    },
-    {
-      id: 'id-17',
-      name: 'Vehicles',
-      nodes: [],
-    },
-  ],
+/**
+ * @param {number} count
+ * @param {number} period
+ * @return {undefined}
+ */
+export const pinger = (count, period) => {
+  let i = count;
+  console.log('Ping');
+  const interval = setInterval(() => {
+    if (--i > 0) {
+      console.log('Ping');
+    } else {
+      clearInterval(interval);
+    }
+  }, period);
 };
 
-// console.log(tree);
+// const pinger = (num, period) => {
+//   let i = num;
+//   console.log('Ping');
+//   const interval = setInterval(() => {
+//     if (--i > 0) {
+//       console.log('Ping');
+//     } else {
+//       clearInterval(interval);
+//     }
+//   }, period);
 
-// markFavorites must add info isFavorite: true or false
+//   // setTimeout(() => {
+//   //   clearInterval(interval);
+//   // }, num * period);
 
-const markFavorites = (tree, favorites) => {
-  const isFavorite = favorites.includes(tree.id);
+//   // console.log(interval);
+// };
 
-  return {
-    ...tree,
-    isFavorite,
-    nodes: tree.nodes.map(childNode => markFavorites(childNode, favorites)),
-  };
-};
+// stop function with:
+// clearInterval(2);
+// clearInterval(3);
 
-console.log(markFavorites(tree, favorites));
+// examples
+pinger(5, 100); // makes 5 writes with 100 ms interval
+pinger(7, 150); // makes 7 writes with 1500 ms interval
 
-export { markFavorites };
+// setTimeout(() => console.log('Hi'), 5000);
+// clearTimeout(() => console.log('Hi'), 5000);
