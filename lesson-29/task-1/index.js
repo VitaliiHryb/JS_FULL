@@ -1,4 +1,7 @@
 // Load image
+const imgSrc =
+  'https://gromcode.s3.eu-central-1.amazonaws.com/courses/front-end/lessons/javascript-full/lesson29/task1/example.png';
+
 function addImage(imgSrc, callback) {
   const imgElem = document.createElement('img');
   imgElem.setAttribute('alt', 'My Photo');
@@ -28,8 +31,8 @@ function onImageLoaded(error, imgElem) {
   sizeElem.textContent = `${width} x ${height}`;
 }
 
-const imgSrc =
-  'https://gromcode.s3.eu-central-1.amazonaws.com/courses/front-end/lessons/javascript-full/lesson29/task1/example.png';
+// const imgSrc =
+//   'https://gromcode.s3.eu-central-1.amazonaws.com/courses/front-end/lessons/javascript-full/lesson29/task1/example.png';
 
 addImage(imgSrc, onImageLoaded);
 
