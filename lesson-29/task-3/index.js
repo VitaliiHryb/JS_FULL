@@ -1,22 +1,47 @@
-// Каррирование
+// Testing event loop
+'use strict';
 
-// // const sum = (a, b) => a + b;
+/**
+ * @return {undefined}
+ */
+export const printing = () => {
+  console.log(1);
 
-// const sum = a => b => a + b;
+  setTimeout(function () {
+    console.log(5);
+  }, 1000);
 
-// const add3 = sum(3);
+  console.log(2);
 
-// const result = add3(5);
-// // console.log(result);
+  setTimeout(function () {
+    console.log(4);
+  }, 0);
 
-const mult = a => b => a * b;
+  setTimeout(function () {
+    console.log(6);
+  }, 2000);
 
-const twice = mult(2);
-// console.log(twice(9));
+  console.log(3);
+};
 
-const triple = mult(3);
+// const main = () => {
+//   console.log(1);
 
-// const result = triple(twice(9));
-// console.log(result);
+//   setTimeout(function () {
+//     console.log(5);
+//   }, 1000);
 
-export { mult, twice, triple };
+//   console.log(2);
+
+//   setTimeout(function () {
+//     console.log(4);
+//   }, 0);
+
+//   setTimeout(function () {
+//     console.log(6);
+//   }, 2000);
+
+//   console.log(3);
+// };
+
+// main();
