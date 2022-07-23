@@ -18,9 +18,6 @@ function addImage(imgSrc, callback) {
 // const imgSrc =
 //   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg';
 
-const imgSrc =
-  'https://gromcode.s3.eu-central-1.amazonaws.com/courses/front-end/lessons/javascript-full/lesson29/task1/example.png';
-
 function onImageLoaded(error, imgElem) {
   if (error) {
     console.log(error);
@@ -30,6 +27,9 @@ function onImageLoaded(error, imgElem) {
   const sizeElem = document.querySelector('.image-size');
   sizeElem.textContent = `${width} x ${height}`;
 }
+
+const imgSrc =
+  'https://gromcode.s3.eu-central-1.amazonaws.com/courses/front-end/lessons/javascript-full/lesson29/task1/example.png';
 
 addImage(imgSrc, onImageLoaded);
 
