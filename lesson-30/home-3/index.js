@@ -1,47 +1,20 @@
-// Testing event loop
-'use strict';
+// Обработчики rejected промиса
 
-/**
- * @return {undefined}
+/*
+ * failedPromise должен зареджектить ошибку new Error('Oops, error!');
+ * Ответьте себе на вопрос, какой тип данных имеет переменная failedPromise
  */
-export const printing = () => {
-  console.log(1);
 
-  setTimeout(function () {
-    console.log(5);
-  }, 1000);
+const failedPromise = new Promise((resolve, reject) => {
+  reject(new Error('Oops, error!'));
+});
 
-  console.log(2);
+// console.log(typeof failedPromise); ==> object
 
-  setTimeout(function () {
-    console.log(4);
-  }, 0);
+/*
+ * выведите в консоль ошибку в ф-ции onError
+ */
 
-  setTimeout(function () {
-    console.log(6);
-  }, 2000);
-
-  console.log(3);
-};
-
-// const main = () => {
-//   console.log(1);
-
-//   setTimeout(function () {
-//     console.log(5);
-//   }, 1000);
-
-//   console.log(2);
-
-//   setTimeout(function () {
-//     console.log(4);
-//   }, 0);
-
-//   setTimeout(function () {
-//     console.log(6);
-//   }, 2000);
-
-//   console.log(3);
-// };
-
-// main();
+failedPromise.catch(function onError(error) {
+  console.log(error);
+});
