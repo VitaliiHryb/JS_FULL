@@ -1,47 +1,48 @@
-// Testing event loop
-'use strict';
+// Promise - first step
 
-/**
- * @return {undefined}
- */
-export const printing = () => {
-  console.log(1);
+const addImage = imgSrc => {
+  const p = new Promise((resolve, reject) => {
+    const imgElem = document.createElement('img');
+    imgElem.setAttribute('alt', 'My Photo');
+    imgElem.src = imgSrc;
+    const containerElem = document.querySelector('.page');
+    containerElem.append(imgElem);
 
-  setTimeout(function () {
-    console.log(5);
-  }, 1000);
+    // function onImageLoaded() {
+    //   resolve(imgElem);
+    // }
 
-  console.log(2);
+    function onImageLoaded() {
+      const { width, height } = imgElem;
+      resolve({ width, height });
+    }
 
-  setTimeout(function () {
-    console.log(4);
-  }, 0);
+    imgElem.addEventListener('load', onImageLoaded);
+    imgElem.addEventListener('error', () => reject(new Error('Image load is failed')));
+  });
 
-  setTimeout(function () {
-    console.log(6);
-  }, 2000);
-
-  console.log(3);
+  return p;
 };
 
-// const main = () => {
-//   console.log(1);
+const imgSrc =
+  'https://gromcode.s3.eu-central-1.amazonaws.com/courses/front-end/lessons/javascript-full/lesson29/task1/example.png';
 
-//   setTimeout(function () {
-//     console.log(5);
-//   }, 1000);
+const resultPromise = addImage(imgSrc);
 
-//   console.log(2);
+resultPromise.catch(error => console.log(error));
 
-//   setTimeout(function () {
-//     console.log(4);
-//   }, 0);
+resultPromise.then(data => console.log(data));
 
-//   setTimeout(function () {
-//     console.log(6);
-//   }, 2000);
+// console.log(result);
 
-//   console.log(3);
-// };
+export { addImage };
 
-// main();
+// function onImageLoaded(error, imgElem) {
+//   if (error) {
+//     console.log(error);
+//     return;
+//   }
+//   const { width, height } = imgElem;
+//   const sizeElem = document.querySelector('.image-size');
+//   sizeElem.textContent = `${width} x ${height}`;
+// }
