@@ -1,47 +1,33 @@
-// Testing event loop
-'use strict';
+// Обработчики успешного промиса (Success Promise Handlers)
+/* ===> 1 <=== */
 
-/**
- * @return {undefined}
+/*
+ * successPromise должен зарезолвить число 67
+ * Ответьте себе на вопрос, какой тип данных имеет переменная successPromise
  */
-export const printing = () => {
-  console.log(1);
 
-  setTimeout(function () {
-    console.log(5);
-  }, 1000);
+const successPromise = new Promise(resolve => {
+  resolve(67);
+  // console.log(number);
+});
 
-  console.log(2);
+/*
+ * допишите обработчик успешного промиса (аргументы и тело ф-ции onSuccess)
+ * чтобы в консоль вывелся квадрат числа, которое резолвиться из successPromise
+ */
 
-  setTimeout(function () {
-    console.log(4);
-  }, 0);
+successPromise.then(function onSuccess(number) {
+  const squared = number * number;
+  console.log(squared);
+});
 
-  setTimeout(function () {
-    console.log(6);
-  }, 2000);
+/*
+ * в обработчике ошибок промиса (ф-ция onError внутри .catch()) выведите в консоль текст 'I am an error'
+ * текст вывелся в консоль?
+ * подумайте почему
+ */
+successPromise.catch(function onError() {
+  console.log('I am an error');
+});
 
-  console.log(3);
-};
-
-// const main = () => {
-//   console.log(1);
-
-//   setTimeout(function () {
-//     console.log(5);
-//   }, 1000);
-
-//   console.log(2);
-
-//   setTimeout(function () {
-//     console.log(4);
-//   }, 0);
-
-//   setTimeout(function () {
-//     console.log(6);
-//   }, 2000);
-
-//   console.log(3);
-// };
-
-// main();
+// текст не вывелся, потому что нет ошибки
