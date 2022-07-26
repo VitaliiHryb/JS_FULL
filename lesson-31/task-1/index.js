@@ -18,7 +18,7 @@ const requestUserData = userId => {
           name: 'John',
           age: 17,
           userId,
-          email: `${userId}`,
+          email: `${userId}@example.com`,
         });
       }, 1000);
     }
@@ -28,6 +28,7 @@ const requestUserData = userId => {
 };
 
 // 'userid777'
+// 'userid777@example.com'
 export { requestUserData };
 
 // requestUserData('user-1').then(data => console.log(data));
