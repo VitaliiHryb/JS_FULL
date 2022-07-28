@@ -1,43 +1,45 @@
-// Фикс цепочки промисов
-const successPromise = new Promise(resolve => {
-  resolve(32);
-});
+// Гонка промисов
 
-/*
- * исправь цепочку промисов, чтобы в последнем обработчике вывелось нужное число
- */
+// const servers = {
+//   'https://server.com/us',
+//   'https://server.com/eu',
+//   'https://server.com/au',
+// }
 
-successPromise
-  .then(number => {
-    const halfNumber = number / 2;
-    return halfNumber;
-  })
-  .then(
-    number =>
-      new Promise(resolve => {
-        const squaredNumber = number * number;
-        resolve(squaredNumber);
-      }),
-  )
-  .then(result => {
-    console.log(result); // 256
+// ==> // const servers = [
+//   'https://server.com/us/users/userid',
+//   'https://server.com/eu/users/userid',
+//   'https://server.com/au/users/userid',
+// ];
+
+const getRandomNumbers = (from, to) => from + Math.random() * (to - from);
+
+const request = url =>
+  new Promise(resolve => {
+    const randomDelay = getRandomNumbers(1000, 3000);
+    setTimeout(() => {
+      resolve({
+        userData: {
+          name: 'Tom',
+          age: 17,
+        },
+        source: url,
+      });
+    }, randomDelay);
   });
 
-/*
- * исправь цепочку промисов, чтобы в последнем обработчике вывелось нужное число
- */
-successPromise
-  .then(
-    number =>
-      new Promise(resolve => {
-        const tenNumber = number * 10;
-        resolve(tenNumber);
-      }),
-  )
-  .then(result => {
-    console.log(result); // 320
-  });
+const servers = [
+  'https://server.com/us',
+  'https://server.com/eu',
+  'https://server.com/au',
+];
 
-console.log(
-  '!!! Обрати внимание, что этот текст вывелся самым первым. Ведь это синхронный код, а промисы - асинхронны !!!',
-);
+const getUserASAP = userId => {
+  const userUrls = servers.map(serverUrl => `${serverUrl}/users/${userId}`);
+
+  const requests = userUrls.map(userUrl => request(userUrl));
+
+  return Promise.race(requests);
+};
+
+getUserASAP('user-id-1').then(res => console.log(res));
