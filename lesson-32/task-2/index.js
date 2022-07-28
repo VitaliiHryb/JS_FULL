@@ -43,3 +43,5 @@ const getUserASAP = userId => {
 };
 
 getUserASAP('user-id-1').then(res => console.log(res));
+
+export { getUserASAP };
