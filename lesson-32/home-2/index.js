@@ -1,43 +1,31 @@
-// Фикс цепочки промисов
-const successPromise = new Promise(resolve => {
-  resolve(32);
-});
+const promiseNumber1 = Promise.resolve(67);
+const promiseNumber2 = Promise.resolve(23);
+const promiseNumber3 = Promise.resolve(8);
 
 /*
- * исправь цепочку промисов, чтобы в последнем обработчике вывелось нужное число
+ * создай промис и присвой переменной resultPromise
+ * чтобы в консоль вывелась сумма всех чисел из трех промисов
  */
 
-successPromise
-  .then(number => {
-    const halfNumber = number / 2;
-    return halfNumber;
+// update code below
+// Promise.all(promise) // разрешается только тогда,
+// когда все переданные ему обещания (в виде массива) разрешаются
+// Promise.allSettled(promise) // этот всегда будет разрешен
+
+// export const resultPromise = null;
+
+const resultPromise = Promise.all([
+  promiseNumber1,
+  promiseNumber2,
+  promiseNumber3,
+]);
+
+resultPromise
+  .then(numbersList => {
+    console.log(numbersList);
+    const sum = numbersList.reduce((acc, num) => acc + num, 0);
+    return sum;
   })
-  .then(
-    number =>
-      new Promise(resolve => {
-        const squaredNumber = number * number;
-        resolve(squaredNumber);
-      }),
-  )
   .then(result => {
-    console.log(result); // 256
+    console.log(result); // 98
   });
-
-/*
- * исправь цепочку промисов, чтобы в последнем обработчике вывелось нужное число
- */
-successPromise
-  .then(
-    number =>
-      new Promise(resolve => {
-        const tenNumber = number * 10;
-        resolve(tenNumber);
-      }),
-  )
-  .then(result => {
-    console.log(result); // 320
-  });
-
-console.log(
-  '!!! Обрати внимание, что этот текст вывелся самым первым. Ведь это синхронный код, а промисы - асинхронны !!!',
-);
