@@ -33,11 +33,15 @@ const getValueWithDelay = (value, delay) =>
   });
 
 const anyncNum1 = getValueWithDelay(56, 1000);
-const anyncNum2 = getValueWithDelay(undefined, 2000);
-const anyncNum3 = getValueWithDelay('66', 3000);
+// const anyncNum2 = getValueWithDelay(undefined, 2000);
+const anyncNum2 = getValueWithDelay(10, 2000);
+// const anyncNum3 = getValueWithDelay('66', 3000);
+const anyncNum3 = getValueWithDelay(66, 3000);
 
 const getSum = numbers =>
-  numbers.filter(value => !isNaN(value)).reduce((acc, num) => acc + Number(num), 0);
+  numbers
+    .filter(value => !isNaN(value))
+    .reduce((acc, num) => acc + Number(num), 0);
 
 const asyncSum = (...asyncNumbers) => {
   return Promise.all(asyncNumbers)
@@ -45,8 +49,14 @@ const asyncSum = (...asyncNumbers) => {
     .catch(() => Promise.reject(new Error("Can't calculate")));
 };
 
-// asyncSum(anyncNum1, anyncNum2, anyncNum3).then(result => console.log(result));
+// const asyncSum = (...asyncNumbers) => {
+//   return Promise.allSettled(asyncNumbers).then(numbers => console.log(numbers));
+// };
 
-asyncSum(anyncNum1, Promise.reject(new Error('err')), anyncNum3).then(result =>
-  console.log(result),
-);
+asyncSum(anyncNum1, anyncNum2, anyncNum3).then(result => console.log(result));
+
+// asyncSum(anyncNum1, Promise.reject(new Error('err')), anyncNum3).then(result =>
+//   console.log(result),
+// );
+
+export { asyncSum };
