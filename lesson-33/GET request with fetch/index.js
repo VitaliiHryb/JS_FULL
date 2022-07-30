@@ -2,7 +2,8 @@ const userAvatarElem = document.querySelector('.user__avatar');
 const userNameElem = document.querySelector('.user__name');
 const userLocationElem = document.querySelector('.user__location');
 
-const defaultAvatar = 'https://';
+// const defaultAvatar = 'https://';
+const defaultAvatar = 'https://avatars.githubusercontent.com/u/1342004';
 
 userAvatarElem.src = defaultAvatar;
 
