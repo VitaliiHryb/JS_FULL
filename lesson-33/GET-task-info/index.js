@@ -23,20 +23,15 @@ function getTasksList() {
 }
 
 function getTaskById(taskId) {
-  const arr = getTasksList();
-  // const arr = [
-  //   { id: '1', isDone: false },
-  //   { id: '2', isDone: false },
-  // ];
-  return arr.filter(task => task.id === taskId);
+  // const arr = getTasksList();
+  // arr.filter(task => task.id === taskId);
+  return fetch(`${baseUrl}/${taskId}`).then(response => response.json());
 }
 
 // // examples
 // getTasksList().then(tasksList => {
 //   console.log(tasksList); // ==> [ {'id':'1', 'isDone':false ... }, {'id':'2', 'isDone':false ... }, ...]
 // });
-
-// // console.log(getTaskById('2'));
 
 // getTaskById('2').then(taskData => {
 //   console.log(taskData); // ==> { 'id': '2', 'text': 'District Communications Specialist', 'isDone': false, 'createdDate': 1651499052, 'finishedDate': 1651499052 }
