@@ -19,40 +19,37 @@ const baseUrl = 'https://5e5cf5eb97d2ea0014796f01.mockapi.io/api/v1/tasks';
 
 function getTasksList() {
   // console.log(fetch(baseUrl).then(response => response.json()));
-  return fetch(`${baseUrl}`).then(response => response.json());
+  return fetch(baseUrl).then(response => response.json());
 }
 
 function getTaskById(taskId) {
-  // put your code here
+  const arr = getTasksList();
+  // const arr = [
+  //   { id: '1', isDone: false },
+  //   { id: '2', isDone: false },
+  // ];
+  return arr.filter(task => task.id === taskId);
 }
 
-// examples
+// // examples
 // getTasksList().then(tasksList => {
 //   console.log(tasksList); // ==> [ {'id':'1', 'isDone':false ... }, {'id':'2', 'isDone':false ... }, ...]
 // });
 
+// // console.log(getTaskById('2'));
+
 // getTaskById('2').then(taskData => {
 //   console.log(taskData); // ==> { 'id': '2', 'text': 'District Communications Specialist', 'isDone': false, 'createdDate': 1651499052, 'finishedDate': 1651499052 }
 // });
-// -------------------------------------------------------------------------------------
 
-// const getResours = async url => {
-//   const respons = await fetch(url);
-//   console.log(respons);
+export { getTasksList, getTaskById };
+
+// const fetchUserData = () => {
+//   const result = fetch(`https://api.github.com/users`).then(response =>
+//     response.json(),
+//   );
+//   console.log(result);
+//   return result;
 // };
 
-// getTasksList(baseUrl);
-
-// -------------------------------------------------------------------------------------
-
-// export { getTasksList, getTaskById };
-
-const fetchUserData = () => {
-  const result = fetch(`https://api.github.com/users`).then(response =>
-    response.json(),
-  );
-  console.log(result);
-  return result;
-};
-
-fetchUserData();
+// fetchUserData();
