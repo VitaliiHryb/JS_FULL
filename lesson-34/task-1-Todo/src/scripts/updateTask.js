@@ -27,3 +27,9 @@ function onToggleTask(event) {
 }
 
 export { onToggleTask };
+
+// 1. Prepare data
+// 2. Update data in db (Data Base)
+// 3. Read new data from server
+// 4. Save new data to front-end storage
+// 5. Update UI based on new data
