@@ -6,13 +6,19 @@
 // 2. getTaskById принемает как единственный аргумент строку taskId
 // Должна сделать запрос на сервер за указанной задачей и вернуть промис с обьектом задачи
 
+// Типичные ошибки
+// 1. getTaskById не должна загружать все таски, а только нужную
+// 2. fetch возвращает промис. И метод then тоже возвращает промис.
+// Что бы проверить роботу функций из задания, на них тоже нужно подписатся,
+// как это сделано в примере работы
+
 // Алгоритм
 // 1.
 
 const baseUrl = 'https://5e5cf5eb97d2ea0014796f01.mockapi.io/api/v1/tasks';
 
 function getTasksList() {
-  console.log(fetch(baseUrl).then(response => response.json()));
+  // console.log(fetch(baseUrl).then(response => response.json()));
   return fetch(`${baseUrl}`).then(response => response.json());
 }
 
@@ -40,3 +46,13 @@ function getTaskById(taskId) {
 // -------------------------------------------------------------------------------------
 
 // export { getTasksList, getTaskById };
+
+const fetchUserData = () => {
+  const result = fetch(`https://api.github.com/users`).then(response =>
+    response.json(),
+  );
+  console.log(result);
+  return result;
+};
+
+fetchUserData();
