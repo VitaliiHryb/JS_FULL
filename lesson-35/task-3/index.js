@@ -1,91 +1,77 @@
-const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
+import { fetchUserData, fetchRepositories } from './gateways.js';
+import { renderUserData } from './user.js';
+import { renderRepos, cleanReposList } from './repos.js';
+import { showSpinner, hideSpinner } from './spinner.js';
 
-const preferDefaultExport = require('eslint-plugin-import/lib/rules/prefer-default-export');
+// пользователь-пустышка (что бы не дублировать код)
+const defaultUser = {
+  avatar_url: 'https://avatars3.githubusercontent.com/u10001',
+  name: '',
+  location: '',
+};
 
-const submitBtnElem = document.querySelector('.submit-button');
-const form = document.forms[0];
-const inputs = [...document.querySelectorAll('input')];
-const errorTextElem = document.querySelector('.error-text');
+// что бы не дублировать код, отрендерить код с пустышкой
+renderUserData(defaultUser);
 
-function validateFields() {
-  if (form.reportValidity()) {
-    submitBtnElem.disabled = false;
-  } else {
-    submitBtnElem.disabled = true;
-  }
-  errorTextElem.textContent = '';
-}
+const showUserBtnElem = document.querySelector('.name-form__btn');
+const userNameInputElem = document.querySelector('.name-form__input');
 
-function submitData(event) {
-  event.preventDefault();
-  const newUser = [...new FormData(form)].reduce(
-    (acc, [field, value]) => ({ ...acc, [field]: value }),
-    {},
-  );
-
-  fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify(newUser),
-  })
-    .then(response => response.json())
-    .then(data => {
-      inputs.map(elem => (elem.value = ''));
-      submitBtnElem.disabled = true;
-      alert(JSON.stringify(data));
+// подписка на новый поиск
+function onSearchUser() {
+  showSpinner();
+  cleanReposList();
+  const userName = userNameInputElem.value;
+  fetchUserData(userName)
+    .then(userData => {
+      renderUserData(userData);
+      return userData.repos_url;
     })
-    .catch(() => {
-      errorTextElem.textContent = 'Failed to create user';
+    .then(url => fetchRepositories(url))
+    .then(reposList => {
+      renderRepos(reposList);
+      hideSpinner();
+    })
+    .catch(err => {
+      hideSpinner();
+      alert('Failed to load data');
     });
 }
 
-form.addEventListener('input', validateFields);
-form.addEventListener('submit', submitData);
+showUserBtnElem.addEventListener('click', onSearchUser);
 
-// Основные требования:
-// 1. По нажатию на кнопку Register нужно сохранить данные юзера, отправив данные формы на сервер
-// '.submit-button' ==> // (используй в качестве сервера свой mockapi.io)
-// 2. Ответ от сервера требуется вывести в alert в виде объекта
-// 3. После успешного сохранения данных нужно очистить поля формы
-// Подсказка: (установить пустую строку как значение)
-// 4. Кнопка Register должна быть disabled, если хотя бы одно поле не валидно
-// Подсказка: (используй HTMLFormElement.reportValidity() у элемента формы для ее валидации)!
+// after TASK-2 PRACTICE
+// default img
+// https://gromcode.s3.eu-central-1.amazonaws.com/front-end/javascript/lesson35/task3/default-page.png
 
-// const preferDefaultExport = require('eslint-plugin-import/lib/rules/prefer-default-export');
+// .user__avatar
+// .user__name
+// .user__location
 
-// const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
+// for data https://api.github.com/users/USERNAME
 
-// OPTION 2
-// const submitBtnElem = document.querySelector('.submit-button');
-// // const form = document.forms[0];
-// const form = document.forms[0];
-// const inputs = [...document.querySelectorAll('input')];
-// const errorTextElem = document.querySelector('.error-text');
+// fetch(`https://api.github.com/users/${userName}`);
 
-// function validateFields() {
-//   if (form.reportValidity()) submitBtnElem.disabled = false;
-// }
+// 10.
+// Имена (поле name) репозиториев нужно вывести в виде списка в элемент
+// .repo-list. Каждый элемент списка должен иметь класс .repo-list__item
 
-// function submitData(event) {
-//   event.preferDefault();
+// 11.
+// Перед запросом за данными нужно показать элемент .spinner.
+// После завершения всех запросов (успешного или с ошибкой) нужно спрятать
+// .spinner. Для управления отображением спиннера используйте класс .spinner_hidden
 
-//   const payload = new FormData(form);
+// `https://api.github.com/users/github`;
 
-//   alert([...payload]);
-
-//   fetch(baseUrl, {
-//     method: 'POST',
-//     /* headers: {
-//       'Content-Type': 'application/json;charset=utf-8',
-//     }, */
-//     body: payload,
+// fetch()
+//   .then(response => {
+//     debugger;
+//     if (response.status === 200) {
+//       return response.json();
+//     }
+//     throw new Error('No data');
 //   })
-//     .then(res => res.json())
-//     .then(data => console.log(data))
-//     .catch(err => console.log('Oh Shit, Hier we go again'));
-// }
-
-// form.addEventListener('input', validateFields, true);
-// form.addEventListener('submit', submitData);
+//   .then(data => console.log(data))
+//   .catch(err => {
+//     debugger;
+//     console.log(err);
+//   });
