@@ -64,8 +64,6 @@ const inputs = [...document.querySelectorAll('input')];
 const errorTextElem = document.querySelector('.error-text');
 
 function validateFields() {
-  // if (form.reportValidity()) submitBtnElem.disabled = false;
-  // submitBtnElem.setAttribute('disabled', !form.reportValidity());
   submitBtnElem.disabled = !form.reportValidity();
 }
 
