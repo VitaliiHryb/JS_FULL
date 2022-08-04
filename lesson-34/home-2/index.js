@@ -1,6 +1,6 @@
 const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
 
-// const preferDefaultExport = require('eslint-plugin-import/lib/rules/prefer-default-export');
+const preferDefaultExport = require('eslint-plugin-import/lib/rules/prefer-default-export');
 
 const submitBtnElem = document.querySelector('.submit-button');
 const form = document.forms[0];
@@ -57,6 +57,7 @@ form.addEventListener('submit', submitData);
 
 // const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
 
+// OPTION 2
 // const submitBtnElem = document.querySelector('.submit-button');
 // // const form = document.forms[0];
 // const form = document.forms[0];
