@@ -72,14 +72,14 @@ function validateFields() {
 function submitData(event) {
   event.preventDefault();
 
-  const payload = new FormData(form);
+  const payload = Object.fromEntries(new FormData(form));
 
   fetch(baseUrl, {
     method: 'POST',
-    /* headers: {
+    headers: {
       'Content-Type': 'application/json;charset=utf-8',
-    }, */
-    body: payload,
+    },
+    body: JSON.stringify(payload),
   })
     .then(res => res.json())
     .then(data => alert(JSON.stringify(data)))
