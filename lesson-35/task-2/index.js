@@ -1,91 +1,61 @@
-const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
+// Обработка ошибок в Promise
+const successRequest = Promise.resolve({ name: 'Tom' });
 
-const preferDefaultExport = require('eslint-plugin-import/lib/rules/prefer-default-export');
-
-const submitBtnElem = document.querySelector('.submit-button');
-const form = document.forms[0];
-const inputs = [...document.querySelectorAll('input')];
-const errorTextElem = document.querySelector('.error-text');
-
-function validateFields() {
-  if (form.reportValidity()) {
-    submitBtnElem.disabled = false;
-  } else {
-    submitBtnElem.disabled = true;
-  }
-  errorTextElem.textContent = '';
-}
-
-function submitData(event) {
-  event.preventDefault();
-  const newUser = [...new FormData(form)].reduce(
-    (acc, [field, value]) => ({ ...acc, [field]: value }),
-    {},
-  );
-
-  fetch(baseUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify(newUser),
+successRequest
+  .then(function onSuccess1(data) {
+    // (1)
+    throw new Error(`Error with data`);
   })
-    .then(response => response.json())
-    .then(data => {
-      inputs.map(elem => (elem.value = ''));
-      submitBtnElem.disabled = true;
-      alert(JSON.stringify(data));
-    })
-    .catch(() => {
-      errorTextElem.textContent = 'Failed to create user';
-    });
-}
+  .catch(function onError1(error) {
+    console.error('onError1', error.message);
+  });
 
-form.addEventListener('input', validateFields);
-form.addEventListener('submit', submitData);
+const failRequest = Promise.reject(new Error('Something went wrong'));
 
-// Основные требования:
-// 1. По нажатию на кнопку Register нужно сохранить данные юзера, отправив данные формы на сервер
-// '.submit-button' ==> // (используй в качестве сервера свой mockapi.io)
-// 2. Ответ от сервера требуется вывести в alert в виде объекта
-// 3. После успешного сохранения данных нужно очистить поля формы
-// Подсказка: (установить пустую строку как значение)
-// 4. Кнопка Register должна быть disabled, если хотя бы одно поле не валидно
-// Подсказка: (используй HTMLFormElement.reportValidity() у элемента формы для ее валидации)!
+failRequest
+  .catch(function onError2(error) {
+    console.error('onError2', error.message);
+    // (2)
+    // throw onError2;
+    return Promise.reject(new Error('Server error'));
+  })
+  .then(function onSuccess2(data) {
+    console.log('onSuccess2', data);
+  })
+  .catch(function onError3(error) {
+    console.error('onError3', error.message);
+  });
 
-// const preferDefaultExport = require('eslint-plugin-import/lib/rules/prefer-default-export');
+// // fetch('https:example.com');
 
-// const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
+// const successRequest = Promise.resolve({ name: 'Tom' });
 
-// OPTION 2
-// const submitBtnElem = document.querySelector('.submit-button');
-// // const form = document.forms[0];
-// const form = document.forms[0];
-// const inputs = [...document.querySelectorAll('input')];
-// const errorTextElem = document.querySelector('.error-text');
-
-// function validateFields() {
-//   if (form.reportValidity()) submitBtnElem.disabled = false;
-// }
-
-// function submitData(event) {
-//   event.preferDefault();
-
-//   const payload = new FormData(form);
-
-//   alert([...payload]);
-
-//   fetch(baseUrl, {
-//     method: 'POST',
-//     /* headers: {
-//       'Content-Type': 'application/json;charset=utf-8',
-//     }, */
-//     body: payload,
+// successRequest
+//   .then(data => {
+//     console.log(data);
+//     throw new Error('Unexpected error');
 //   })
-//     .then(res => res.json())
-//     .then(data => console.log(data))
-//     .catch(err => console.log('Oh Shit, Hier we go again'));
-// }
+//   .catch(err => console.warn(err.message));
 
-// form.addEventListener('input', validateFields, true);
-// form.addEventListener('submit', submitData);
+// const failedRequest = Promise.reject(new Error('Fail'));
+
+// failedRequest
+//   .then(data => {
+//     console.log(data);
+//   })
+//   .catch(err => {
+//     console.warn(err.message);
+//     // return undefined; (on default)
+//     // return Promise.reject('Another error'); // прервали цепочку - option1
+//     throw err; // прервали цепочку - option2 // === return Promise.reject(err)
+//   })
+//   .then(data => {
+//     console.log(data);
+//   })
+//   .catch(err => {
+//     console.warn(err.message);
+//   });
+
+// window.addEventListener('unhandledrejection', function (e) {
+//   console.log(e.reason.message);
+// });
