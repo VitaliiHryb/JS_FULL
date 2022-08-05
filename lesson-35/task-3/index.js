@@ -29,11 +29,12 @@ function onSearchUser() {
     .then(url => fetchRepositories(url))
     .then(reposList => {
       renderRepos(reposList);
-      hideSpinner();
     })
     .catch(err => {
-      hideSpinner();
       alert('Failed to load data');
+    })
+    .finally(() => {
+      hideSpinner();
     });
 }
 
