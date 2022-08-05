@@ -11,7 +11,13 @@ function fetchUserData(userName) {
 
 // подпищик возвращается в виде аргумента
 function fetchRepositories(url) {
-  return fetch(url).then(response => response.json());
+  return fetch(url).then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('Failed to load data');
+  });
 }
-
 export { fetchUserData, fetchRepositories };
+
+// response.ok === response.status === 200
