@@ -40,28 +40,4 @@ getUsersBlogs(['google', 'facebook', 'reactjs']).then(linksList =>
 ); // ==> ["https://opensource.google/", "https://opensource.fb.com", "https://reactjs.org"]
 getUsersBlogs(['microsoft']).then(linksList => console.log(linksList)); // ==> ["https://opensource.microsoft.com"]
 
-// export { getUsersBlogs };
-
-// // async/await
-
-// // async function getUser(userId) {
-// const fetchUser = async userId => {
-//   try {
-//     const response = await fetch(`https://api.github.com/users/${userId}`);
-//     if (!response.ok) {
-//       return null;
-//     }
-//     const userData = await response.json();
-//     return userData;
-//   } catch (err) {
-//     throw new Error('Failed to get user data');
-//   }
-// };
-
-// fetchUser('facebook')
-//   .then(userData => console.log(userData))
-//   .catch(err => alert(err.message));
-
-// export { fetchUser };
-
-// // 'Failed to get user data'
+export { getUsersBlogs };
