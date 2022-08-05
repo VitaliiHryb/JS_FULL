@@ -15,24 +15,19 @@
  * @return {promise}
  */
 
-// fail request: `https://api.github.com//${userId}`
+// option 2
+export async function getUsersBlogs(usersList) {
+  const requests = usersList.map(userId =>
+    fetch(`https://api.github.com/users/${userId}`).then(response => {
+      if (response.ok) return response.json();
+      throw new Error('Failed to load data');
+    }),
+  );
+  const usersData = await Promise.all(requests);
+  return usersData.map(user => user.blog);
+}
 
-const getUsersBlogs = async arr => {
-  try {
-    const response = await arr.map(userId =>
-      fetch(`https://api.github.com/users/${userId}`)
-        .then(response => {
-          if (response.ok) return response.json();
-          throw new Error('Failed to load data');
-        })
-        .then(user => user.blog),
-    );
-    const usersData = await Promise.all(response);
-    return usersData;
-  } catch (err) {
-    console.log(err);
-  }
-};
+// fail request: `https://api.github.com//${userId}`
 
 // examples
 getUsersBlogs(['google', 'facebook', 'reactjs']).then(linksList =>
@@ -40,4 +35,16 @@ getUsersBlogs(['google', 'facebook', 'reactjs']).then(linksList =>
 ); // ==> ["https://opensource.google/", "https://opensource.fb.com", "https://reactjs.org"]
 getUsersBlogs(['microsoft']).then(linksList => console.log(linksList)); // ==> ["https://opensource.microsoft.com"]
 
-export { getUsersBlogs };
+// // option 1
+// export const getUsersBlogs = async arr => {
+//   const response = await arr.map(userId =>
+//     fetch(`https://api.github.com/users/${userId}`)
+//       .then(response => {
+//         if (response.ok) return response.json();
+//         throw new Error('Failed to load data');
+//       })
+//       .then(user => user.blog),
+//   );
+//   const usersData = await Promise.all(response);
+//   return usersData;
+// };
