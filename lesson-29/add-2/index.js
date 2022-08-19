@@ -1,47 +1,41 @@
-// Testing event loop
+// Load user data
 'use strict';
 
 /**
+ * @param {string} userId
+ * @param {function} callback
  * @return {undefined}
  */
-export const printing = () => {
-  console.log(1);
 
-  setTimeout(function () {
-    console.log(5);
-  }, 1000);
+// Напиши функцию, которая принимает id пользователя
+// и имитирует загрузку данных о пользователе
 
-  console.log(2);
+const requestUserData = (userId, callback) => {
+  const randomNumber = Math.floor(Math.random() * 4000);
 
-  setTimeout(function () {
-    console.log(4);
-  }, 0);
-
-  setTimeout(function () {
-    console.log(6);
-  }, 2000);
-
-  console.log(3);
+  if (userId === 'broken') {
+    setTimeout(callback(null, 'Failed to load user data'), randomNumber);
+  } else {
+    setTimeout(callback(userId), randomNumber);
+  }
 };
 
-// const main = () => {
-//   console.log(1);
+export { requestUserData };
 
-//   setTimeout(function () {
-//     console.log(5);
-//   }, 1000);
+// // test data
 
-//   console.log(2);
+// requestUserData('John', (userId, err) =>
+//   console.log(
+//     userId === 'broken'
+//       ? err
+//       : `{ userId: ${userId}, email: '${userId}@example.com' }`,
+//   ),
+// );
 
-//   setTimeout(function () {
-//     console.log(4);
-//   }, 0);
-
-//   setTimeout(function () {
-//     console.log(6);
-//   }, 2000);
-
-//   console.log(3);
-// };
-
-// main();
+// requestUserData('broken', (userId, err) =>
+//   console.log(
+//     userId === null
+//       ? err
+//       : `{ userId: ${userId}, email: '${userId}@example.com' }`,
+//   ),
+// );
