@@ -18,7 +18,7 @@ const delay = (delay, callback, context, ...args) => {
   }, delay);
 };
 
-// export { delay };
+export { delay };
 
 // const test1 = (...rest) => alert(`Привет ${[...rest][1]}`);
 
