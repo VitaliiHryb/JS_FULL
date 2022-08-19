@@ -2,8 +2,6 @@ const baseUrl = 'https://62e9354b01787ec712138da8.mockapi.io/api/v1/users';
 
 const submitBtnElem = document.querySelector('.submit-button');
 const form = document.querySelector('.login-form');
-const inputs = [...document.querySelectorAll('input')];
-const errorTextElem = document.querySelector('.error-text');
 
 function validateFields() {
   submitBtnElem.disabled = !form.reportValidity();
