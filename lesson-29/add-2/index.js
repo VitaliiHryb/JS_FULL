@@ -1,28 +1,83 @@
-import { addImage } from './addImage';
+'use strict';
 
-const addImageV2 = url => {
-  return new Promise((resolve, reject) => {
-    addImage(url, (err, data) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(data);
-    });
-  });
+/**
+ * @param {string} userId
+ * @param {function} callback
+ * @return {undefined}
+ */
+const requestUserData = (userId, callback) => {
+  const randomNumber = Math.floor(1000 + Math.random() * 2000);
+  // console.log(randomNumber);
+
+  if (userId === 'broken') {
+    setTimeout(() => callback(null, 'Failed to load user data'), randomNumber);
+  } else {
+    setTimeout(
+      () => callback(userId, { userId, email: `${userId}@example.com` }),
+      randomNumber,
+    );
+  }
 };
 
-export { addImageV2 };
+export { requestUserData };
 
-// examples
-/*
-addImageV2(
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png',
-)
-  .then(data => console.log(data)) // ==> { width: 200, height: 100 }
-  .catch(error => console.log(error)); // ==> 'Image load failed'
-*/
+// test data
 
-// addImageV2('https://server.com/image.png')
-//   .then(data => console.log(data)) // ==> { width: 200, height: 100 }
-//   .catch(error => console.log(error)); // ==> 'Image load failed'
+// requestUserData('John', (userId, isErr) => console.log(isErr));
+
+// requestUserData('broken', (userId, isErr) => console.log(isErr));
+
+// option-2
+// const requestUserData = (userId, callback) => {
+//   const randomNumber = Math.floor(1000 + Math.random() * 2000);
+//   // console.log(randomNumber);
+
+//   if (userId === 'broken') {
+//     setTimeout(() => callback(null, 'Failed to load user data'), randomNumber);
+//   } else {
+//     setTimeout(
+//       () =>
+//         callback(
+//           userId,
+//           `{ userId: ${userId}, email: '${userId}@example.com' }`,
+//         ),
+//       randomNumber,
+//     );
+//   }
+// };
+
+// requestUserData('John', (userId, isErr) => console.log(isErr));
+
+// requestUserData('broken', (userId, isErr) => console.log(isErr));
+
+// option-3
+// const requestUserData = (userId, callback) => {
+//   const randomNumber = Math.floor(1000 + Math.random() * 2000);
+//   // console.log(randomNumber);
+
+//   if (userId === 'broken') {
+//     setTimeout(() => callback(null, 'Failed to load user data'), randomNumber);
+//   } else {
+//     setTimeout(() => callback(userId), randomNumber);
+//   }
+// };
+
+// export { requestUserData };
+
+// // // test data
+
+// // requestUserData('John', (userId, err) =>
+// //   console.log(
+// //     userId === null
+// //       ? err
+// //       : `{ userId: ${userId}, email: '${userId}@example.com' }`,
+// //   ),
+// // );
+
+// // requestUserData('broken', (userId, err) =>
+// //   console.log(
+// //     userId === null
+// //       ? err
+// //       : `{ userId: ${userId}, email: '${userId}@example.com' }`,
+// //   ),
+// // );
